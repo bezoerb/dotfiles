@@ -1,0 +1,31 @@
+
+# Up-front dotfiles configuration
+# Not part of `load_dotfiles` because it must be sourced before anything else
+# to be sure that commands like `brew` (when installed in a custom location)
+# are already added to the PATH.
+[ -r $HOME/.dotfilesrc ] && source $HOME/.dotfilesrc;
+
+load_dotfiles() {
+    declare -a files=(
+        $HOME/.rvm/scripts/rvm # Load RVM into a shell session *as a function*
+        $HOME/.travis/travis.sh # Load Travis into a shell session
+        $HOME/.dotfiles/shell/options.zsh # Options
+        $HOME/.dotfiles/shell/exports.zsh # Exports
+        $HOME/.dotfiles/shell/aliases.zsh # Aliases
+        $HOME/.dotfiles/shell/functions/* # Functions
+        $HOME/.dotfiles/shell/paths.zsh # Path modifications
+        $HOME/.localrc # Local and private settings not under version control (e.g. git credentials)
+    )
+
+    # if these files are readable, source them
+    for index in ${!files[*]}
+    do
+        if [[ -r ${files[$index]} ]]; then
+            source ${files[$index]}
+        fi
+    done
+}
+
+load_dotfiles
+unset load_dotfiles
+

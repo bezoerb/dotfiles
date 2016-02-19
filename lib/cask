@@ -1,0 +1,102 @@
+#!/bin/bash
+
+run_cask() {
+    # Check for Homebrew
+    if type_exists 'brew'; then
+
+        # Specify your defaults in this environment variable
+        export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+        brew tap caskroom/versions
+
+        e_header "Checking status of desired Casks ..."
+        local list_casks
+        local -a missing_casks
+        local -a desired_casks=(
+            # daily
+            'spectacle'
+            'dropbox'
+            'backblaze'
+            'onepassword'
+            'flux'
+            'alfred'
+            'caffeine'
+
+            # dev
+            'iterm2'
+            'sublime-text3'
+            'atom'
+            'webstorm'
+            'imagealpha'
+            'imageoptim'
+            'virtualbox'
+            'sequel-pro'
+            'phpstorm'
+            'ngrok'
+
+            # fun
+            'caprine'
+            'spotify'
+
+            # browsers
+            'google-chrome'
+            'google-chrome-canary'
+            'firefox'
+            'firefox-nightly'
+            'webkit-nightly'
+            'tor-browser'
+
+            # less often
+            'daisydisk'
+            'handbrake'
+            'vlc'
+            'transmit'
+            'gpgtools'
+            'reeder'
+            'licecap'
+            'transmission'
+            'miro-video-converter'
+
+            # QuickLook plugins
+            'qlcolorcode'
+            'qlstephen'
+            'qlmarkdown'
+            'quicklook-json'
+            'qlprettypatch'
+            'quicklook-csv'
+            'betterzipql'
+            'webp-quicklook'
+            'suspicious-package'
+        )
+
+        for index in ${!desired_casks[*]}
+        do
+            if ! cask_exists ${desired_casks[$index]}; then
+                # Store the name (and options) of every missing formula
+                missing_casks=("${missing_casks[@]}" "${desired_casks[$index]}")
+            fi
+        done
+
+        if [[ "$missing_casks" ]]; then
+            # Convert the array of missing formula into a list of space-separate strings
+            list_casks=$( printf "%s " "${missing_casks[@]}" )
+
+            e_header "Installing missing Homebrew cask..."
+            info list_casks
+            # Install all missing formulae
+            #brew cask install $list_casks
+
+            [[ $? ]] && e_success "Done"
+        fi
+    else
+        printf "\n"
+        e_error "Error: Homebrew not found."
+        printf "Aborting...\n"
+        exit
+    fi
+}
+
+
+
+
+

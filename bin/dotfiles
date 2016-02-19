@@ -1,0 +1,214 @@
+#!/bin/bash
+
+# dotfiles startup script taken from necolas
+
+DOTFILES_DIRECTORY="${HOME}/.dotfiles"
+DOTFILES_TARBALL_PATH="https://github.com/bezoerb/dotfiles/tarball/master"
+DOTFILES_GIT_REMOTE="git@github.com:bezoerb/dotfiles.git"
+
+# If missing, download and extract the dotfiles repository
+if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
+    printf "$(tput setaf 7)Downloading dotfiles...\033[m\n"
+    mkdir ${DOTFILES_DIRECTORY}
+    # Get the tarball
+    curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
+    # Extract to the dotfiles directory
+    tar -zxf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
+    # Remove the tarball
+    rm -rf ${HOME}/dotfiles.tar.gz
+fi
+
+cd ${DOTFILES_DIRECTORY}
+
+source ./lib/help
+source ./lib/utils
+source ./lib/brew
+source ./lib/cask
+source ./lib/npm
+source ./lib/post-install
+
+# Help text
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    run_help
+    exit
+fi
+
+# Test for known flags
+for opt in $@
+do
+    case $opt in
+        --no-packages) no_packages=true ;;
+        --no-sync) no_sync=true ;;
+        -*|--*) e_warning "Warning: invalid option $opt" ;;
+    esac
+done
+
+
+# XCode Command Line Tools
+# thx https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
+if ! xcode-select --print-path &> /dev/null; then
+
+    # Prompt user to install the XCode Command Line Tools
+    xcode-select --install &> /dev/null
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Wait until the XCode Command Line Tools are installed
+    until xcode-select --print-path &> /dev/null; do
+        sleep 5
+    done
+
+    print_result $? 'Install XCode Command Line Tools'
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Point the `xcode-select` developer directory to
+    # the appropriate directory from within `Xcode.app`
+    # https://github.com/alrra/dotfiles/issues/13
+
+    sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+    print_result $? 'Make "xcode-select" developer directory point to Xcode'
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Prompt user to agree to the terms of the Xcode license
+    # https://github.com/alrra/dotfiles/issues/10
+
+    sudo xcodebuild -license
+    print_result $? 'Agree with the XCode Command Line Tools licence'
+
+fi
+
+# Before relying on Homebrew, check that packages can be compiled
+if ! type_exists 'gcc'; then
+    e_error "The XCode Command Line Tools must be installed first."
+    printf "  Download them from: https://developer.apple.com/downloads\n"
+    printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
+    exit 1
+fi
+
+# Check for Homebrew
+if ! type_exists 'brew'; then
+    e_header "Installing Homebrew..."
+    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+fi
+
+# Check for git
+if ! type_exists 'git'; then
+    e_header "Updating Homebrew..."
+    brew update
+    e_header "Installing Git..."
+    brew install git
+fi
+
+# Initialize the git repository if it's missing
+if ! is_git_repo; then
+    e_header "Initializing git repository..."
+    git init
+    git remote add origin ${DOTFILES_GIT_REMOTE}
+    git fetch origin master
+    # Reset the index and working tree to the fetched HEAD
+    # (submodules are cloned in the subsequent sync step)
+    git reset --hard FETCH_HEAD
+    # Remove any untracked files
+    git clean -fd
+fi
+
+# Conditionally sync with the remote repository
+if [[ $no_sync ]]; then
+    printf "Skipped dotfiles sync.\n"
+else
+    e_header "Syncing dotfiles..."
+    # Pull down the latest changes
+    git pull --rebase origin master
+    # Update submodules
+    git submodule update --recursive --init --quiet
+fi
+
+# Install and update packages
+if [[ $no_packages ]]; then
+    printf "Skipped package installations.\n"
+else
+    printf "Updating packages...\n"
+    # Install Homebrew formulae
+    run_brew
+    # Install Homebrew casks
+    run_cask
+    # install things besides homebrew & configure tools like dnsmasq
+    run_postinstall
+    # Install Node packages
+    run_npm
+fi
+
+link() {
+    # Force create/replace the symlink.
+    ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+}
+
+local_gitconfig () {
+    if ! [ -f ${HOME}/.gitconfig.local ]
+    then
+        git_credential='cache'
+        if [ "$(uname -s)" == "Darwin" ]
+        then
+          git_credential='osxkeychain'
+        fi
+
+        user ' - What is your github author name?'
+        read -e git_authorname
+        user ' - What is your github author email?'
+        read -e git_authoremail
+
+        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" ${DOTFILES_DIRECTORY}/git/gitconfig.local.template > ${HOME}/.gitconfig.local
+
+        e_success "Created ~/.gitconfig.local"
+    fi
+}
+
+mirrorfiles() {
+    local_gitconfig
+
+    # Any global git commands will be written to `.gitconfig`.
+    # This prevents them being committed to the repository.
+    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+
+    # Force remove the vim directory if it's already there.
+    if [ -e "${HOME}/.vim" ]; then
+        rm -rf "${HOME}/.vim"
+    fi
+
+    # Create the necessary symbolic links between the `.dotfiles` and `HOME`
+    # directory. The `bash_profile` sources other files directly from the
+    # `.dotfiles` repository.
+    link "shell/zshrc"        ".zshrc"
+    link "shell/curlrc"       ".curlrc"
+    link "git/gitattributes"  ".gitattributes"
+    link "git/gitignore"      ".gitignore"
+    link "vim"                ".vim"
+    link "vim/gvimrc"         ".gvimrc"
+    link "vim/vimrc"          ".vimrc"
+
+    e_success "Dotfiles update complete!"
+}
+
+# Ask before potentially overwriting files
+seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+
+if is_confirmed; then
+    mirrorfiles
+    source ${HOME}/.zshrc
+else
+    printf "Aborting...\n"
+    exit 1
+fi
+
+# Ask before potentially overwriting OS X defaults
+seek_confirmation "Warning: This step may modify your OS X system defaults."
+
+if is_confirmed; then
+    bash ./bin/osxdefaults
+    e_success "OS X settings updated! You may need to restart."
+else
+    printf "Skipped OS X settings update.\n"
+fi
+
