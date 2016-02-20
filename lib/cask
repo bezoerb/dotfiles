@@ -84,7 +84,7 @@ run_cask() {
             e_header "Installing missing Homebrew cask..."
 
             # Install all missing formulae
-           # brew cask install $list_casks
+            brew cask install $list_casks
 
             [[ $? ]] && e_success "Done"
         fi

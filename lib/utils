@@ -62,8 +62,8 @@ type_exists() {
 # Test whether a Homebrew formula is already installed
 # $1 - formula name (may include options)
 formula_exists() {
-    if $(brew list $1 >/dev/null); then
-        printf "%s already installed.\n" "$1"
+    if $(brew list $1 >/dev/null 2>&1); then
+        e_success "$1 already installed."
         return 0
     fi
 
@@ -74,13 +74,13 @@ formula_exists() {
 # Test whether a Homebrew formula is already installed
 # $1 - formula name (may include options)
 cask_exists() {
-    if $(brew cask list $1 >/dev/null); then
-        printf "%s already installed.\n" "$1"
+    if $(brew cask list $1 >/dev/null 2>&1); then
+        e_success "$1 already installed."
         return 0
     fi
 
-    if $(ls -la /Applications | grep -i $1 >/dev/null); then
-        printf "%s already installed.\n" "$1"
+    if $(ls -la /Applications | grep -i $1 >/dev/null 2>&1); then
+        e_success "$1 already installed."
         return 0
     fi
 
