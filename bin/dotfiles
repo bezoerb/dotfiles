@@ -197,7 +197,16 @@ seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
 if is_confirmed; then
     mirrorfiles
-    source ${HOME}/.zshrc
+    zsh ${HOME}/.zshrc
+
+    e_header "Setting up oh-my-zsh..."
+    # zsh / oh-my-zsh
+    wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+    # use sindres pure theme
+    rsync -avz --quiet ${DOTFILES_DIRECTORY}/shell/pure.zsh-theme  ${HOME}/.oh-my-zsh/custom/pure.zsh-theme
+    # set zsh as default shell
+    chsh -s `which zsh`
+    [[ $? ]] && e_success "Done"
 else
     printf "Aborting...\n"
     exit 1
