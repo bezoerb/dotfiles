@@ -8,6 +8,15 @@ run_postinstall() {
     # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+    e_header "Setting up oh-my-zsh..."
+    # zsh / oh-my-zsh
+    wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+    # use sindres pure theme
+    rsync -avz --quiet ${DOTFILES_DIRECTORY}/shell/pure.zsh-theme  ${HOME}/.oh-my-zsh/custom/pure.zsh-theme
+    # set zsh as default shell
+    chsh -s `which zsh`
+    [[ $? ]] && e_success "Done"
+
     # https://github.com/jamiew/git-friendly
     # the `push` command which copies the github compare URL to my clipboard is heaven
     bash < <( curl https://raw.github.com/jamiew/git-friendly/master/install.sh)
