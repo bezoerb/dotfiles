@@ -1,5 +1,3 @@
-#!/usr/local/bin/zsh
-
 # Directories to be prepended to PATH
 declare -a dirs_to_prepend=(
     "/usr/local/bin" # Ensure that this bin always takes precedence over `/usr/bin`
@@ -19,20 +17,20 @@ declare -a dirs_to_append=(
 )
 
 # Prepend directories to PATH
-for index in ${!dirs_to_prepend[*]}
+for dir in ${(k)dirs_to_prepend}
 do
-    if [ -d ${dirs_to_prepend[$index]} ]; then
+    if [ -d ${dir} ]; then
         # If these directories exist, then prepend them to existing PATH
-        PATH="${dirs_to_prepend[$index]}:$PATH"
+        PATH="${dir}:$PATH"
     fi
 done
 
 # Append directories to PATH
-for index in ${!dirs_to_append[*]}
+for dir in ${(k)dirs_to_append}
 do
-    if [ -d ${dirs_to_append[$index]} ]; then
+    if [ -d ${dir} ]; then
         # If these bins exist, then append them to existing PATH
-        PATH="$PATH:${dirs_to_append[$index]}"
+        PATH="$PATH:${dir}"
     fi
 done
 

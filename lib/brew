@@ -98,7 +98,7 @@ run_brew() {
             list_formulae=$( printf "%s " "${missing_formulae[@]}" )
 
             e_header "Installing missing Homebrew formulae..."
-            info list_formulae
+            info ${list_formulae}
             # Install all missing formulae
       #      brew install $list_formulae
 

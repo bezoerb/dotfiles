@@ -3,6 +3,18 @@
 # Not part of `load_dotfiles` because it must be sourced before anything else
 # to be sure that commands like `brew` (when installed in a custom location)
 # are already added to the PATH.
+#[ -r $HOME/.dotfilesrc ] && source $HOME/.dotfilesrc;
+
+#[ -r $HOME/.rvm/scripts/rvm ] && source $HOME/.rvm/scripts/rvm;
+#[ -r $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh;
+#[ -r $HOME/.dotfiles/shell/options.zsh ] && source $HOME/.dotfiles/shell/options.zsh;
+#[ -r $HOME/.dotfiles/shell/exports.zsh ] && source $HOME/.dotfiles/shell/exports.zsh;
+#[ -r $HOME/.dotfiles/shell/aliases.zsh ] && source $HOME/.dotfiles/shell/aliases.zsh;
+#[ -r $HOME/.dotfiles/shell/functions/* ] && source $HOME/.dotfiles/shell/functions/*;
+#[ -r $HOME/.dotfiles/shell/paths.zsh ] && source $HOME/.dotfiles/shell/paths.zsh;
+#[ -r $HOME/.localrc ] && source $HOME/.localrc;
+
+
 [ -r $HOME/.dotfilesrc ] && source $HOME/.dotfilesrc;
 
 load_dotfiles() {
@@ -17,15 +29,16 @@ load_dotfiles() {
         $HOME/.localrc # Local and private settings not under version control (e.g. git credentials)
     )
 
+
+
     # if these files are readable, source them
-    for index in ${!files[*]}
+    for file in ${(k)files}
     do
-        if [[ -r ${files[$index]} ]]; then
-            source ${files[$index]}
+        if [[ -r ${file} ]]; then
+            source ${file}
         fi
     done
 }
 
 load_dotfiles
 unset load_dotfiles
-

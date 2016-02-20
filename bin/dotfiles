@@ -182,6 +182,7 @@ mirrorfiles() {
     # `.dotfiles` repository.
     link "shell/zshrc"        ".zshrc"
     link "shell/curlrc"       ".curlrc"
+    link "shell/dircolors"    ".dircolors"
     link "git/gitattributes"  ".gitattributes"
     link "git/gitignore"      ".gitignore"
     link "vim"                ".vim"
