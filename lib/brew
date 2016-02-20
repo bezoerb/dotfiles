@@ -100,7 +100,7 @@ run_brew() {
             e_header "Installing missing Homebrew formulae..."
 
             # Install all missing formulae
-            brew install $list_formulae
+          #  brew install $list_formulae
 
             [[ $? ]] && e_success "Done"
         fi
