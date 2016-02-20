@@ -82,9 +82,9 @@ run_cask() {
             list_casks=$( printf "%s " "${missing_casks[@]}" )
 
             e_header "Installing missing Homebrew cask..."
-            info ${list_casks}
+
             # Install all missing formulae
-            #brew cask install $list_casks
+            brew cask install $list_casks
 
             [[ $? ]] && e_success "Done"
         fi
