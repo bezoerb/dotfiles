@@ -37,15 +37,12 @@ export CLICOLOR_FORCE=1
 alias ls='gls -AFh ${colorflag} --group-directories-first'
 alias lsd='ls -l | grep "^d"' # only directories
 
-# `cat` with beautiful colors. requires: sudo easy_install -U Pygments
-# alias cc='pygmentize -O style=monokai -f console256 -g'
-
 ###
 
 # git root
 alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`'
 alias bfg='java -jar ~/Bin/bfg-1.12.3.jar'
-alias fix="git diff --name-only | uniq | xargs atom"
+alias fix="git diff --name-only | uniq | xargs subl"
 
 # Networking. IP address, dig, DNS
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

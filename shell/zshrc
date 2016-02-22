@@ -30,4 +30,3 @@ load_dotfiles() {
 
 load_dotfiles
 unset load_dotfiles
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

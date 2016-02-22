@@ -24,7 +24,6 @@ setopt dotglob
 #ulimit -n 65536
 #ulimit -u 2048
 
-
 zstyle ':completion:*' use-cache yes
 zstyle ':completion::complete:grunt::options:' expire 1
 
