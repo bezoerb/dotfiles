@@ -17,7 +17,7 @@ run_cask() {
             'spectacle'
             'dropbox'
             'backblaze'
-            '1password'
+            #'1password' Appstore
             'flux'
             'alfred'
             'caffeine'
@@ -51,7 +51,7 @@ run_cask() {
             'daisydisk'
             'handbrake'
             'vlc'
-            'transmit'
+            #'transmit' Appstore
             'gpgtools'
             'reeder'
             'licecap'
