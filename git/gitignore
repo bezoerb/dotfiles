@@ -3,6 +3,9 @@
 ._*
 Thumbs.db
 
+# WebStorm / PhpStorm
+.idea
+
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes

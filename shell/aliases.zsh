@@ -24,6 +24,8 @@ alias zshconfig="subl ~/.zshrc"
 alias ohmyzsh="subl ~/.oh-my-zsh"
 alias reload!='. ~/.zshrc'
 
+alias phpconfig="subl /usr/local/etc/php"
+
 ###
 # time to upgrade `ls`
 # use coreutils `ls` if possible…
