@@ -59,11 +59,13 @@ run_brew() {
             'mtr' # mtr - ping & traceroute. best.
 
             # dev
-            'php70 --with-fpm --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp'
-            'php70-imagick'
-            'php70-intl'
-            'php70-xdebug'
-            'php70-mcrypt'
+            'php-versions'
+            'php56 --with-fpm --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp'
+            'php56-imagick'
+            'php56-intl'
+            'php56-xdebug'
+            'php56-mcrypt'
+            'php56-memcached'
             'python'
             'node'
             'mysql'
@@ -95,8 +97,19 @@ run_brew() {
             fi
         done
 
-        # php7-memcached needs HEAD install
-        brew install --HEAD homebrew/php/php70-memcached
+        #php7
+        if ! formula_exists 'php70'; then
+            brew unlink php56
+            brew install php70 --with-fpm --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp
+            brew install php70-imagick
+            brew install php70-intl
+            brew install php70-xdebug
+            brew install php70-mcrypt
+            # php7-memcached needs HEAD install
+            brew install --HEAD homebrew/php/php70-memcached
+        fi
+
+        
 
         # use latest rsync rather than out-dated OS X rsync
         # install separately from the main formulae list to fix gh-19
