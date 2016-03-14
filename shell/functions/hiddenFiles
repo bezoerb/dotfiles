@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# toggle hidden files in finder
+function hiddenFiles() {
+	local enabled="${1:-false}"
+	if [[ $enabled == 0 || $enabled == false ]]
+	then
+		defaults write com.apple.finder AppleShowAllFiles -bool false
+	else
+		defaults write com.apple.finder AppleShowAllFiles -bool true
+	fi
+} 
