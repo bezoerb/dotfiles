@@ -48,7 +48,6 @@ run_cask() {
             'tor-browser'
 
             # less often
-            'daisydisk'
             'handbrake'
             'vlc'
             #'transmit' Appstore

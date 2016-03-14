@@ -25,6 +25,8 @@ alias ohmyzsh="subl ~/.oh-my-zsh"
 alias reload!='. ~/.zshrc'
 
 alias phpconfig="subl /usr/local/etc/php"
+alias apacheconfig="subl /etc/apache2"
+
 
 ###
 # time to upgrade `ls`
@@ -74,6 +76,8 @@ alias memcached="memcached -d -m 24 -p 11211"
 alias enable_xdebug="export XDEBUG_CONFIG=\"idekey=PHPSTORM\""
 alias disable_xdebug="export XDEBUG_CONFIG=\"\""
 alias hosts='sudo $EDITOR /etc/hosts'
+
+alias spoof-mac="spoof-mac.py"
 
 # here's LS_COLORS
 # github.com/trapd00r/LS_COLORS
