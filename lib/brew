@@ -59,7 +59,7 @@ run_brew() {
             'mtr' # mtr - ping & traceroute. best.
 
             # dev
-            'php-versions'
+            'php-version'
             'php56 --with-fpm --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp'
             'php56-imagick'
             'php56-intl'
