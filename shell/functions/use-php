@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+# Header logging
+_header() {
+    printf "\n$(tput setaf 7)%s$(tput sgr0)" "$@"
+}
+
+# Success logging
+_success() {
+    printf "  $(tput setaf 64)✓ %s$(tput sgr0)" "$@"
+}
+
+# switch from php5 to php7 and vice versa
+use-php() {
+	# Ask for the administrator password upfront
+	sudo -v
+
+  if [[ -n "$1" ]]; then
+  	_header "Switching cli version"
+  	 php-version "$1"
+  	[[ $? ]] && _success
+  	_header "Updating httpd.conf"
+  	[[ $? ]] && _success
+	sudo sed -i -E -- "s/LoadModule php([0-9]+)_module \/usr/#LoadModule php\1_module \/usr/g" /private/etc/apache2/httpd.conf
+	sudo sed -i -E -- "s/#+LoadModule php${1}_module \/usr/LoadModule php${1}_module \/usr/g" /private/etc/apache2/httpd.conf
+	_header "Verifying apache config"
+	apachectl configtest >/dev/null 2>&1
+  	[[ $? ]] && _success
+	_header "Restarting apache"
+	sudo apachectl restart
+  	[[ $? ]] && _success
+  else
+	echo "proper usage: phpswitch <version>. "
+  fi
+}
+
+
+
