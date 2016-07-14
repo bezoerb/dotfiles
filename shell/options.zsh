@@ -12,7 +12,7 @@ bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
 # plugins
-plugins=(git bower brew grunt github npm nvm rsync sublime osx node npm gpg-agent history colorize gitignore symfony2 n98-magerun wp-cli z systemadmin)
+plugins=(git bower brew git-extras grunt github npm nvm rsync sublime osx node npm gpg-agent history colorize gitignore symfony2 n98-magerun wp-cli z systemadmin)
 
 # hook in oh my zsh
 source $ZSH/oh-my-zsh.sh

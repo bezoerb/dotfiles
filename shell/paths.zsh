@@ -8,6 +8,7 @@ dirs_to_prepend=(
 declare -a dirs_to_append
 dirs_to_append=(
     "/usr/bin"
+    "/usr/local/sbin"
     "$HOME/bin"
     "$HOME/.dotfiles/bin"
     "$HOME/.rvm/bin"
