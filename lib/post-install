@@ -19,7 +19,7 @@ run_postinstall() {
 
     # https://github.com/jamiew/git-friendly
     # the `push` command which copies the github compare URL to my clipboard is heaven
-    "bash < <( curl https://raw.githubusercontent.com/jamiew/git-friendly/master/install.sh)"
+    bash -c "$(curl -fsSL raw.githubusercontent.com/jamiew/git-friendly/master/install.sh)"
 
      # allow mtr to run without sudo
     mtrlocation=$(brew info mtr | grep Cellar | sed -e 's/ (.*//') #  e.g. `/Users/paulirish/.homebrew/Cellar/mtr/0.86`
