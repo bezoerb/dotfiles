@@ -15,29 +15,30 @@ run_cask() {
         local -a desired_casks=(
             # daily
             'spectacle'
-            'dropbox'
-            'backblaze'
+            #'dropbox'
+            #'backblaze'
             #'1password' Appstore
             'flux'
             'alfred'
             'caffeine'
-            'little-snitch'
+            'slack'
+            #'little-snitch'
 
             # dev
-            'iterm2'
-            'sublime-text3'
+            #'iterm2'
+            'sublime-text'
             'atom'
-            'webstorm'
+            #'webstorm'
             'imagealpha'
             'imageoptim'
-            'virtualbox'
+            #'virtualbox'
             'sequel-pro'
             'phpstorm'
             'ngrok'
 
             # fun
-            'caprine'
-            'spotify'
+            #'caprine'
+            #'spotify'
 
             # browsers
             'google-chrome'
@@ -48,11 +49,11 @@ run_cask() {
             'tor-browser'
 
             # less often
-            'handbrake'
-            'vlc'
+            #'handbrake'
+            #'vlc'
             #'transmit' Appstore
-            'gpgtools'
-            'reeder'
+            #'gpgtools'
+            #'reeder'
             'licecap'
             'transmission'
             'miro-video-converter'
@@ -95,8 +96,3 @@ run_cask() {
         exit
     fi
 }
-
-
-
-
-

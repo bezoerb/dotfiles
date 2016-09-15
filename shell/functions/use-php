@@ -17,23 +17,20 @@ use-php() {
 	sudo -v
 
   if [[ -n "$1" ]]; then
-  	_header "Switching cli version"
-  	 php-version "$1"
-  	[[ $? ]] && _success
+    _header "Switching cli version"
+    php-version "$1"
+    [[ $? ]] && _success
   	_header "Updating httpd.conf"
-  	[[ $? ]] && _success
+    [[ $? ]] && _success
 	sudo sed -i -E -- "s/LoadModule php([0-9]+)_module \/usr/#LoadModule php\1_module \/usr/g" /private/etc/apache2/httpd.conf
 	sudo sed -i -E -- "s/#+LoadModule php${1}_module \/usr/LoadModule php${1}_module \/usr/g" /private/etc/apache2/httpd.conf
 	_header "Verifying apache config"
 	apachectl configtest >/dev/null 2>&1
-  	[[ $? ]] && _success
+  	[[ $? ]] && _success 
 	_header "Restarting apache"
 	sudo apachectl restart
-  	[[ $? ]] && _success
+  	[[ $? ]] && _success 
   else
 	echo "proper usage: phpswitch <version>. "
   fi
 }
-
-
-
