@@ -15,7 +15,7 @@ run_cask() {
         local -a desired_casks=(
             # daily
             'spectacle'
-            #'dropbox'
+            'dropbox'
             #'backblaze'
             #'1password' Appstore
             'flux'
@@ -25,10 +25,10 @@ run_cask() {
             #'little-snitch'
 
             # dev
-            #'iterm2'
+            'iterm2'
             'sublime-text'
             'atom'
-            #'webstorm'
+            'webstorm'
             'imagealpha'
             'imageoptim'
             #'virtualbox'
@@ -37,26 +37,25 @@ run_cask() {
             'ngrok'
 
             # fun
-            #'caprine'
+            'caprine'
             #'spotify'
 
             # browsers
             'google-chrome'
             'google-chrome-canary'
             'firefox'
-            'firefox-nightly'
+            'firefoxnightly'
             'webkit-nightly'
-            'tor-browser'
+            #'torbrowser'
 
             # less often
             #'handbrake'
             #'vlc'
             #'transmit' Appstore
-            #'gpgtools'
-            #'reeder'
+            'gpgtools'
+            'reeder'
             'licecap'
             'transmission'
-            'miro-video-converter'
 
             # QuickLook plugins
             'qlcolorcode'
@@ -66,7 +65,7 @@ run_cask() {
             'qlprettypatch'
             'quicklook-csv'
             'betterzipql'
-            'webp-quicklook'
+            'webpquicklook'
             'suspicious-package'
         )
 
