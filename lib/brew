@@ -68,7 +68,7 @@ run_brew() {
             'php56-memcached'
             'python'
             'node'
-            'mysql'
+            'mariadb'
             'macvim --override-system-vim'
 
             # tools
