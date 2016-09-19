@@ -60,7 +60,7 @@ run_brew() {
 
             # dev
             'php-version'
-            'php56 --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp'
+            'php56 --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp  --without-fpm'
             'php56-imagick'
             'php56-intl'
             'php56-xdebug'
@@ -100,7 +100,7 @@ run_brew() {
         #php7
         if ! formula_exists 'php70'; then
             brew unlink php56
-            brew install php70 --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp
+            brew install php70 --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp --without-fpm
             brew install php70-imagick
             brew install php70-intl
             brew install php70-xdebug
