@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ ! -d "$WP_I18N_LIB" ]; then
+	WP_I18N_LIB="/usr/lib/wpi18n";
+fi
+
+if [ -z "$1" ]; then
+	projectType="wp-plugin"
+else
+	projectType="$1"
+fi
+
+if [ -z "$2" ]; then
+	textdomain=""
+else
+	textdomain=$2
+fi
+
+if [ -z "$3" ]; then
+	projectDir=`pwd`
+else
+	projectDir="$3"
+fi
+
+pluginBasename=$(basename "$projectDir")
+
+if [[ ! $textdomain ]]; then
+	textdomain="$pluginBasename"
+fi
+
+if [ -d "$projectDir/languages" ]; then
+	php "$WP_I18N_LIB/makepot.php" $projectType $projectDir "$projectDir/languages/$textdomain.pot"
+elif [ -d "$projectDir/lang" ]; then
+	php "$WP_I18N_LIB/makepot.php" $projectType $projectDir "$projectDir/lang/$textdomain.pot"
+else
+	php "$WP_I18N_LIB/makepot.php" $projectType $projectDir "$textdomain.pot"
+fi
