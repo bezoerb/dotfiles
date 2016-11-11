@@ -8,6 +8,42 @@ run_postinstall() {
     # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+    e_header "Have launchd start homebrew/apache/httpd24 now and restart at startup"
+    # TODO: add the following lines to /usr/local/etc/apache2/2.4/httpd.conf
+    # Listen 80
+    # 
+    # change /usr/local/var/www/htdocs to /Users/<user>/Sites
+    # 
+    # enable 
+    # LoadModule rewrite_module libexec/mod_rewrite.so
+    # LoadModule deflate_module libexec/mod_deflate.so
+    # LoadModule expires_module libexec/mod_expires.so
+    # LoadModule vhost_alias_module libexec/mod_vhost_alias.so
+    # Include /usr/local/etc/apache2/2.4/extra/httpd-ssl.conf
+    # 
+    # <IfModule dir_module>
+    #     DirectoryIndex index.php index.html
+    # </IfModule>
+
+    # <FilesMatch \.php$>
+    #     SetHandler application/x-httpd-php
+    # </FilesMatch>
+    # 
+    # change
+    # User _www
+    # Group _www
+    # 
+    # ServerName localhost
+    # 
+    cd /usr/local/etc/apache2/2.4
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout server.key -out server.crt
+
+    brew services start homebrew/apache/httpd24
+    [[ $? ]] && e_success "Done"
+
+    e_header "Install php switcher script"
+    curl -L https://gist.github.com/w00fz/142b6b19750ea6979137b963df959d11/raw > /usr/local/bin/sphp
+    chmod +x /usr/local/bin/sphp
     e_header "Setting up oh-my-zsh..."
     # zsh / oh-my-zsh
     wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh

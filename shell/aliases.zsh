@@ -25,7 +25,7 @@ alias ohmyzsh="subl ~/.oh-my-zsh"
 alias reload!='. ~/.zshrc'
 
 alias phpconfig="subl /usr/local/etc/php"
-alias apacheconfig="subl /etc/apache2"
+alias apacheconfig="subl /usr/local/etc/apache2/2.4/"
 
 
 ###

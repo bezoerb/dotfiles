@@ -59,17 +59,21 @@ run_brew() {
             'mtr' # mtr - ping & traceroute. best.
 
             # dev
+            'httpd24 --with-privileged-ports --with-http2'
             'php-version'
-            'php56 --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp  --without-fpm'
+            'php56 --with-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp  --without-fpm'
             'php56-imagick'
             'php56-intl'
             'php56-xdebug'
             'php56-mcrypt'
             'php56-memcached'
+            'php56-opcache'
+            'php56-apcu'
             'python'
             'node'
             'mariadb'
             'macvim --override-system-vim'
+            'xdebug-osx'
 
             # tools
             'ssh-copy-id'
@@ -80,6 +84,7 @@ run_brew() {
             # media
             'ffmpeg --with-libvpx'
             'imagemagick --with-webp'
+            'gifsicle'
             'graphicsmagick'
             'optipng'
             'zopfli'
@@ -100,11 +105,13 @@ run_brew() {
         #php7
         if ! formula_exists 'php70'; then
             brew unlink php56
-            brew install php70 --wit-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp --without-fpm
+            brew install php70 --with-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp --without-fpm
             brew install php70-imagick
             brew install php70-intl
             brew install php70-xdebug
             brew install php70-mcrypt
+            brew install php70-opcache
+            brew install php70-apcu
             # php7-memcached needs HEAD install
             brew install --HEAD homebrew/php/php70-memcached
         fi
@@ -125,3 +132,4 @@ run_brew() {
     fi
 
 }
+brew install imagemagick

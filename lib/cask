@@ -23,6 +23,7 @@ run_cask() {
             'caffeine'
             'slack'
             #'little-snitch'
+            'Caskroom/cask/xquartz'
 
             # dev
             'iterm2'
