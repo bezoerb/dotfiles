@@ -44,6 +44,7 @@ run_postinstall() {
     e_header "Install php switcher script"
     curl -L https://gist.github.com/w00fz/142b6b19750ea6979137b963df959d11/raw > /usr/local/bin/sphp
     chmod +x /usr/local/bin/sphp
+    
     e_header "Setting up oh-my-zsh..."
     # zsh / oh-my-zsh
     wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
