@@ -73,7 +73,7 @@ done
 
 # dev
 alias memcached="memcached -d -m 24 -p 11211"
-alias enable_xdebug="export XDEBUG_CONFIG=\"remote_port=9090 idekey=PHPSTORM\""
+alias enable_xdebug="export XDEBUG_CONFIG=\"remote_port=9000 idekey=PHPSTORM\""
 alias disable_xdebug="export XDEBUG_CONFIG=\"\""
 alias hosts='sudo $EDITOR /etc/hosts'
 
