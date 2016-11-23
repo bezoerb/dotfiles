@@ -66,21 +66,15 @@ run_postinstall() {
     # dnsmasq
     e_header "Setting up dnsmasq..."
     mkdir -pv $(brew --prefix)/etc/ && \
-    echo 'address=/.build/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf && \
     echo 'address=/.dev/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
     echo 'address=/.work/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
     echo 'address=/.localhost/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
-    echo 'address=/.spielwiese/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
-    echo 'address=/.kb/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
     sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons && \
     sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist && \
     sudo mkdir -v /etc/resolver && \
-    sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/build' && \
     sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev' && \
     sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/work' && \
     sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/localhost' && \
-    sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/spielwiese' && \
-    sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/kb' && \
     #flush cache
     sudo discoveryutil mdnsflushcache && scutil --dns
     [[ $? ]] && e_success "Done"
