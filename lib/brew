@@ -17,16 +17,19 @@ run_brew() {
         brew tap homebrew/dupes && \
         brew tap homebrew/versions && \
         brew tap homebrew/php && \
-        brew tap sitespeedio/sitespeedio && \
-        brew tap tobli/browsertime
+        brew tap homebrew/apache
+
         [[ $? ]] && e_success "Done"
 
 
         #switch from SecureTransport
-        e_header "reinstall curl with openssl support"
-        brew reinstall --with-openssl curl
-        [[ $? ]] && e_success "Done"
-
+        if $(brew info curl | grep with-openssl >/dev/null 2>&1); then
+            e_success "curl with openssl support already installed."
+        else
+            e_header "reinstall curl with openssl support"
+            brew reinstall --with-openssl curl
+            [[ $? ]] && e_success "Done"
+        fi
 
         e_header "Checking status of desired Homebrew formulae..."
         local list_formulae
@@ -77,7 +80,6 @@ run_brew() {
 
             # tools
             'ssh-copy-id'
-            'sitespeed.io'
             'testssl'
             'rename' # http://plasmasturm.org/code/rename/
 
@@ -132,4 +134,3 @@ run_brew() {
     fi
 
 }
-brew install imagemagick
