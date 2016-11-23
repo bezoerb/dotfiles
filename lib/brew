@@ -21,6 +21,22 @@ run_brew() {
 
         [[ $? ]] && e_success "Done"
 
+        # disable macos apache before install
+        sudo apachectl stop
+        sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
+
+        if ! formula_exists httpd24; then
+            brew install httpd24 --with-privileged-ports --with-http2
+        fi
+
+        e_header "Have launchd start homebrew/apache/httpd24 now and restart at startup"
+        sudo brew services start homebrew/apache/httpd24
+        [[ $? ]] && e_success "Done"
+
+        # disable php70 to prevent collisions
+        if formula_exists 'php70'; then
+            brew unlink php70
+        fi
 
         #switch from SecureTransport
         if $(brew info curl | grep with-openssl >/dev/null 2>&1); then
@@ -62,7 +78,6 @@ run_brew() {
             'mtr' # mtr - ping & traceroute. best.
 
             # dev
-            'httpd24 --with-privileged-ports --with-http2'
             'php-version'
             'php56 --with-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp  --without-fpm'
             'php56-imagick'
