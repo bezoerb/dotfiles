@@ -16,13 +16,10 @@ run_cask() {
             # daily
             'spectacle'
             'dropbox'
-            #'backblaze'
-            #'1password' Appstore
             'flux'
             'alfred'
             'caffeine'
             'slack'
-            #'little-snitch'
             'Caskroom/cask/xquartz'
 
             # dev
@@ -32,15 +29,16 @@ run_cask() {
             'webstorm'
             'imagealpha'
             'imageoptim'
-            #'virtualbox'
             'sequel-pro'
             'phpstorm'
             'ngrok'
             'dash'
 
+            #graphics
+            'sketch'
+
             # fun
             'caprine'
-            #'spotify'
 
             # browsers
             'google-chrome'
@@ -48,12 +46,8 @@ run_cask() {
             'firefox'
             'firefoxnightly'
             'webkit-nightly'
-            #'torbrowser'
 
             # less often
-            #'handbrake'
-            #'vlc'
-            #'transmit' Appstore
             'gpgtools'
             'reeder'
             'licecap'
