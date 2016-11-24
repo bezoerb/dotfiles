@@ -58,7 +58,7 @@ run_brew() {
 
             # git
             'git'
-            'gh'
+            'hub'
             'git-extras'
 
             # system
@@ -78,7 +78,6 @@ run_brew() {
             'mtr' # mtr - ping & traceroute. best.
 
             # dev
-            'php-version'
             'php56 --with-apache --with-mysql --with-homebrew-curl --with-homebrew-openssl --without-snmp  --without-fpm'
             'php56-imagick'
             'php56-intl'
@@ -89,6 +88,7 @@ run_brew() {
             'php56-apcu'
             'python'
             'node'
+            'yarn'
             'mariadb'
             'macvim --override-system-vim'
             'xdebug-osx'
@@ -96,6 +96,7 @@ run_brew() {
             # tools
             'ssh-copy-id'
             'testssl'
+            'rsync'
             'rename' # http://plasmasturm.org/code/rename/
 
             # media

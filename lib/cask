@@ -27,10 +27,11 @@ run_cask() {
             'sublime-text'
             'atom'
             'webstorm'
+            'phpstorm'
+            'visual-studio-code'
             'imagealpha'
             'imageoptim'
             'sequel-pro'
-            'phpstorm'
             'ngrok'
             'dash'
 
