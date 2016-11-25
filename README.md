@@ -61,8 +61,6 @@ Options:
 
 Homebrew formulae:
 
-*needs update as this has changed*
-
 * GNU core utilities
 * [git](http://git-scm.com/)
 * [hub](https://github.com/github/hub)
