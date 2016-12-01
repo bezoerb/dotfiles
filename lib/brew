@@ -107,6 +107,7 @@ run_brew() {
             'optipng'
             'zopfli'
             'jpeg'
+            'youtube-dl'
         )
 
         for index in ${!desired_formulae[*]}

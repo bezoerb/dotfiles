@@ -53,6 +53,7 @@ run_cask() {
             'reeder'
             'licecap'
             'transmission'
+            'clipgrab'
 
             # QuickLook plugins
             'qlcolorcode'

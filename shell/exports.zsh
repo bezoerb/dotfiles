@@ -15,7 +15,3 @@ export SYMFONY_DEBUG=true
 # Fix for phantomjs
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
 export EDITOR=/usr/bin/vim
-
-export GIT_FRIENDLY_NO_BUNDLE=true
-export GIT_FRIENDLY_NO_NPM=true
-export GIT_FRIENDLY_NO_BOWER=true
