@@ -111,6 +111,9 @@ run_postinstall() {
     # http://pygments.org/
     pip install pygments
 
+    # configure diff-so-fancy
+    git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+
 
 
 

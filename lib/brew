@@ -60,6 +60,7 @@ run_brew() {
             'git'
             'hub'
             'git-extras'
+            'diff-so-fancy'
 
             # system
             'dnsmasq'
