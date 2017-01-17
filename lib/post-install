@@ -35,6 +35,7 @@ run_postinstall() {
     mkdir -p /Users/$(whoami)/Sites && \
     sudo sed -i -e "s/\/usr\/local\/var\/www\/htdocs/\/Users\/$(whoami)\/Sites/g" $apacheConf && \
     sudo sed -i -r "s/#ServerName.*/ServerName localhost/" $apacheConf && \
+    echo "" >> $apacheConf && \
     echo "<FilesMatch \.php$>" >> $apacheConf && \
     echo "    SetHandler application/x-httpd-php" >> $apacheConf && \
     echo "</FilesMatch>" >> $apacheConf && \
