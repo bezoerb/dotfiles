@@ -14,10 +14,7 @@ run_brew() {
         [[ $? ]] && e_success "Done"
 
         e_header "Homebrew taps"
-        brew tap homebrew/dupes && \
-        brew tap homebrew/versions && \
-        brew tap homebrew/php && \
-        brew tap homebrew/apache
+        brew tap homebrew/php
 
         [[ $? ]] && e_success "Done"
 
@@ -87,6 +84,7 @@ run_brew() {
             'php56-memcached'
             'php56-opcache'
             'php56-apcu'
+            'php-version'
             'python'
             'node'
             'yarn'

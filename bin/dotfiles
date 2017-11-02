@@ -97,6 +97,17 @@ if ! type_exists 'brew'; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
 fi
 
+# Fix directories for OSX High sierra
+sudo mkdir -p /usr/local/Cellar
+sudo mkdir -p /usr/local/Caskroom
+sudo mkdir -p /usr/local/Frameworks
+sudo mkdir -p /usr/local/include
+sudo mkdir -p /usr/local/lib
+sudo mkdir -p /usr/local/sbin
+sudo mkdir -p /usr/local/bin
+sudo mkdir -p /usr/local/var
+sudo chown -R $(whoami) $(brew --prefix)/*
+
 # Check for git
 if ! type_exists 'git'; then
     e_header "Updating Homebrew..."

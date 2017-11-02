@@ -10,7 +10,7 @@ run_postinstall() {
     [[ $? ]] && e_success "Done"
 
     e_header "create a self-signed certificate"
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $(brew --prefix)/etc/apache2/2.4/server.key -out $(brew --prefix)/etc/apache2/2.4/server.crt
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $(brew --prefix)/etc/httpd/server.key -out $(brew --prefix)/etc/httpd/server.crt
     [[ $? ]] && e_success "Done"
 
     e_header "Configure apache/httpd24"

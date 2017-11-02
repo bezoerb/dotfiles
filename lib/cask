@@ -49,7 +49,7 @@ run_cask() {
             'webkit-nightly'
 
             # less often
-            'gpgtools'
+            'gpg-suite'
             'reeder'
             'licecap'
             'transmission'
