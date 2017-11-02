@@ -16,6 +16,8 @@ run_postinstall() {
     e_header "Configure apache/httpd24"
     
     apacheConf=$(sudo httpd -V | grep -i server_config_file | cut -d '"' -f 2)
+    apacheConfDir=$(dirname $apacheConf)
+    mkdir -p $(dirname $apacheConf)/sites-enabled
 
     # load dev modules
     sudo sed -i -e "/LoadModule rewrite_module/s/^#//" $apacheConf && \

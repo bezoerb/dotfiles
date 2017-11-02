@@ -130,6 +130,7 @@ run_brew() {
             brew install php70-mcrypt
             brew install php70-opcache
             brew install php70-apcu
+            brew install php70-ioncubeloader 
             # php7-memcached needs HEAD install
             brew install --HEAD homebrew/php/php70-memcached
         fi
