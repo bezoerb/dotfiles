@@ -54,6 +54,7 @@ run_cask() {
             'licecap'
             'transmission'
             'clipgrab'
+            'kap'
 
             # QuickLook plugins
             'qlcolorcode'

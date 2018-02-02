@@ -15,3 +15,5 @@ export SYMFONY_DEBUG=true
 # Fix for phantomjs
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
 export EDITOR=/usr/bin/vim
+
+export ANDROID_HOME=~/Library/Android/sdk 
