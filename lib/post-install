@@ -45,7 +45,7 @@ run_postinstall() {
     [[ $? ]] && e_success "Done"
 
     e_header "Install php switcher script"
-    curl -L https://gist.github.com/w00fz/142b6b19750ea6979137b963df959d11/raw > /usr/local/bin/sphp
+    curl -L https://gist.githubusercontent.com/rhukster/f4c04f1bf59e0b74e335ee5d186a98e2/raw > /usr/local/bin/sphp
     chmod +x /usr/local/bin/sphp
 
     e_header "Setting up oh-my-zsh..."
