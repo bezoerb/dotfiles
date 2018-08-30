@@ -57,9 +57,11 @@ run_postinstall() {
     chsh -s `which zsh`
     [[ $? ]] && e_success "Done"
 
+    e_header "Adding git-friendly..."
     # https://github.com/jamiew/git-friendly
     # the `push` command which copies the github compare URL to my clipboard is heaven
     bash -c "$(curl -fsSL raw.githubusercontent.com/jamiew/git-friendly/master/install.sh)"
+    [[ $? ]] && e_success "Done"
 
      # allow mtr to run without sudo
     mtrlocation=$(brew info mtr | grep Cellar | sed -e 's/ (.*//') #  e.g. `/Users/paulirish/.homebrew/Cellar/mtr/0.86`
