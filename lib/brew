@@ -74,8 +74,6 @@ run_brew() {
             'node'
             'yarn'
             'mariadb'
-            'macvim --override-system-vim'
-            'xdebug-osx'
 
             # tools
             'ssh-copy-id'
@@ -104,12 +102,7 @@ run_brew() {
                 brew install ${desired_formulae[$index]}
             fi
         done
-      
-
-        # use latest rsync rather than out-dated OS X rsync
-        # install separately from the main formulae list to fix gh-19
-        brew install https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb
-
+        
         # Remove outdated versions from the Cellar
         brew cleanup
     else
