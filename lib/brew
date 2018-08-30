@@ -13,11 +13,6 @@ run_brew() {
         brew upgrade
         [[ $? ]] && e_success "Done"
 
-        e_header "Homebrew taps"
-        brew tap homebrew/php
-
-        [[ $? ]] && e_success "Done"
-
         # disable macos apache before install
         sudo apachectl stop
         sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
