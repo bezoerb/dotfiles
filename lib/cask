@@ -58,7 +58,8 @@ run_cask() {
             'quicklook-json'
             'qlprettypatch'
             'quicklook-csv'
-            'betterzipql'
+            'betterzip'
+            'qlimagesize'
             'webpquicklook'
             'suspicious-package'
         )
