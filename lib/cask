@@ -42,10 +42,8 @@ run_cask() {
             'caprine'
 
             # browsers
-            'google-chrome'
-            'google-chrome-canary'
             'firefox'
-            'firefoxnightly'
+            'firefox-nightly'
             'webkit-nightly'
 
             # less often
