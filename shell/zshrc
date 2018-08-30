@@ -11,7 +11,6 @@ load_dotfiles() {
     files=(
         #$HOME/.rvm/scripts/rvm # Load RVM into a shell session *as a function*
         #$HOME/.travis/travis.sh # Load Travis into a shell session
-        "$(brew --prefix php-version)/php-version.sh"
         $HOME/.dotfiles/shell/options.zsh # Options
         $HOME/.dotfiles/shell/exports.zsh # Exports
         $HOME/.dotfiles/shell/aliases.zsh # Aliases
