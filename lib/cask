@@ -7,8 +7,6 @@ run_cask() {
         # Specify your defaults in this environment variable
         export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-        brew tap caskroom/versions
-
         e_header "Checking status of desired Casks ..."
         local list_casks
         local -a missing_casks
@@ -44,7 +42,6 @@ run_cask() {
             # browsers
             'firefox'
             'firefox-nightly'
-            'webkit-nightly'
 
             # less often
             'gpg-suite'
