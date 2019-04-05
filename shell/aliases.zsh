@@ -27,6 +27,9 @@ alias reload!='. ~/.zshrc'
 alias phpconfig="subl /usr/local/etc/php"
 alias apacheconfig="subl $(dirname $(httpd -V | grep -i server_config_file | cut -d '"' -f 2))"
 
+# Android emulator
+alias android_emulator="~/Library/Android/sdk/emulator/emulator @Nexus_5X_API_28_x86  -dns-server 8.8.8.8"
+alias emulator_dev_menu="adb shell input keyevent 82"
 
 ###
 # time to upgrade `ls`

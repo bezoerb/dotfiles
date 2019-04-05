@@ -71,14 +71,16 @@ run_postinstall() {
     # dnsmasq
     e_header "Setting up dnsmasq..."
     mkdir -pv $(brew --prefix)/etc/ && \
-    echo 'address=/.dev/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
+    # echo 'address=/.dev/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
+    echo 'address=/.local/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
     echo 'address=/.work/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
     echo 'address=/.localhost/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf && \
     sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons && \
     sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist && \
     sudo mkdir -v /etc/resolver && \
-    sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev' && \
+    # sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev' && \
     sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/work' && \
+    sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/local' && \
     sudo zsh -c 'echo "nameserver 127.0.0.1" > /etc/resolver/localhost' && \
     #flush cache
     sudo discoveryutil mdnsflushcache && scutil --dns
@@ -119,6 +121,21 @@ run_postinstall() {
     git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 
 
+    # Install php extensions
+    sphp 5.6 -s
+    printf "\n" | pecl install apcu && printf "\n" | pecl install yaml && pprintf "\n" | pecl install xdebug && printf "\n" | pecl install memcached-2.2.0  && printf "\n" | pecl install imagick && printf "\n" | pecl install igbinary  
 
+    sphp 7.0 -s
+    printf "\n" | pecl uninstall -r apcu && pecl install apcu && pecl uninstall -r yaml && pecl install yaml && pecl uninstall -r xdebug && pecl install xdebug &&  pecl uninstall -r memcached && pecl install memcached  &&  pecl uninstall -r mcrypt && pecl install mcrypt &&  pecl uninstall -r imagick && pecl install imagick &&  pecl uninstall -r igbinary && pecl install igbinary    
+
+    sphp 7.1 -s
+    printf "\n" | pecl uninstall -r apcu && pecl install apcu && pecl uninstall -r yaml && pecl install yaml && pecl uninstall -r xdebug && pecl install xdebug &&  pecl uninstall -r memcached && pecl install memcached  &&  pecl uninstall -r mcrypt && pecl install mcrypt &&  pecl uninstall -r imagick && pecl install imagick &&  pecl uninstall -r igbinary && pecl install igbinary    
+
+    sphp 7.2 -s
+    printf "\n" | pecl uninstall -r apcu && pecl install apcu && pecl uninstall -r yaml && pecl install yaml && pecl uninstall -r xdebug && pecl install xdebug &&  pecl uninstall -r memcached && pecl install memcached  &&  pecl uninstall -r mcrypt && pecl install mcrypt &&  pecl uninstall -r imagick && pecl install imagick &&  pecl uninstall -r igbinary && pecl install igbinary    
+    
+
+    # Remove extensions in php ini's
+    # Add config files for each extension
 
 }

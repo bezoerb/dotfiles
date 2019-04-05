@@ -52,6 +52,10 @@ run_brew() {
             # system
             'dnsmasq'
             'libmemcached'
+            'libyaml'
+            'icu4c'
+            'mkcert'
+            'nss'
 
             # shell
             'zsh'

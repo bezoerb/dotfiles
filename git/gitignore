@@ -3,6 +3,9 @@
 ._*
 Thumbs.db
 
+# Visual Studio Code
+.vscode
+
 # WebStorm / PhpStorm
 .idea
 
