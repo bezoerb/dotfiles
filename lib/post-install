@@ -5,15 +5,13 @@ run_postinstall() {
     # Keep-alive: update existing `sudo` time stamp until `we are` has finished
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-    e_header "Have launchd start homebrew/apache/httpd24 now and restart at startup"
+    e_header "Have launchd start httpd now and restart at startup"
     sudo brew services start httpd
     [[ $? ]] && e_success "Done"
 
-    e_header "create a self-signed certificate"
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $(brew --prefix)/etc/httpd/server.key -out $(brew --prefix)/etc/httpd/server.crt
-    [[ $? ]] && e_success "Done"
+  
 
-    e_header "Configure apache/httpd24"
+    e_header "Configure apache/httpd"
     
     apacheConf=$(sudo httpd -V | grep -i server_config_file | cut -d '"' -f 2)
     apacheConfDir=$(dirname $apacheConf)
@@ -84,9 +82,6 @@ run_postinstall() {
     sudo discoveryutil mdnsflushcache && scutil --dns
     [[ $? ]] && e_success "Done"
 
-    #setup daemon for php 7
-    ln -sfv /usr/local/opt/php70/*.plist ~/Library/LaunchAgents && \
-    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.php70.plist
 
     # https://rvm.io
     # rvm for the rubiess
@@ -120,7 +115,7 @@ run_postinstall() {
 
 
     # Install php extensions
-    printf "\n" | pecl uninstall -r apcu && pecl install apcu && pecl uninstall -r yaml && pecl install yaml && pecl uninstall -r xdebug && pecl install xdebug &&  pecl uninstall -r memcached && pecl install memcached  &&  pecl uninstall -r imagick && pecl install imagick &&  pecl uninstall -r igbinary && pecl install igbinary    
+    printf "\n" | pecl uninstall -r apcu && pecl install apcu && pecl uninstall -r yaml && pecl install yaml && pecl uninstall -r xdebug && pecl install xdebug &&  pecl uninstall -r igbinary && pecl install igbinary   &&  pecl uninstall -r memcached && pecl install memcached  &&  pecl uninstall -r imagick && pecl install imagick  
     
 
     # Remove extensions in php ini's

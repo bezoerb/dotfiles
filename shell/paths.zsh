@@ -18,7 +18,7 @@ dirs_to_append=(
     "$(brew --prefix ruby)/bin"
     "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
     "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
-    "$(brew --prefix php@7.0)/bin" # Add php
+    "$(brew --prefix php)/bin" # Add php
 )
 
 
