@@ -7,7 +7,7 @@ This repo contains *my* dotfiles. It is heavily based on [necolas](https://githu
 * `oh-my-zsh` instead of `bash`
 
 
-## How to install
+## How to install  
 
 The installation step <!-- requires the [XCode Command Line
 Tools](https://developer.apple.com/downloads) and --> may overwrite existing
