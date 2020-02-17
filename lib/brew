@@ -18,7 +18,7 @@ run_brew() {
         sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
 
         if ! formula_exists httpd24; then
-            brew install httpd --with-privileged-ports --with-http2
+            brew install httpd
         fi
 
         e_header "Have launchd start homebrew/apache/httpd24 now and restart at startup"
@@ -39,6 +39,8 @@ run_brew() {
         local -a missing_formulae
         local -a desired_formulae=(
             # GNU core utilities (those that come with OS X are outdated)
+            'openldap' 
+            'libiconv'
             'coreutils'
             'moreutils'
             'findutils'
