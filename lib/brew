@@ -56,7 +56,6 @@ run_brew() {
             'bash'
             'bash-completion'
             'tree'
-            'gnu-sed --default-names' # Install the GNU version of sed
             'wget' # Install wget with IRI support
             'grep'
             'screen'
