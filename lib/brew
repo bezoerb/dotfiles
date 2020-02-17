@@ -64,9 +64,8 @@ run_brew() {
             'bash'
             'bash-completion'
             'tree'
-            'ack'
             'gnu-sed --default-names' # Install the GNU version of sed
-            'wget --with-iri' # Install wget with IRI support
+            'wget' # Install wget with IRI support
             'grep'
             'screen'
             'mtr' # mtr - ping & traceroute. best.
@@ -85,8 +84,8 @@ run_brew() {
             'rename' # http://plasmasturm.org/code/rename/
 
             # media
-            'ffmpeg --with-libvpx'
-            'imagemagick --with-webp'
+            'ffmpeg '
+            'imagemagick'
             'gifsicle'
             'graphicsmagick'
             'optipng'

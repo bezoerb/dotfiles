@@ -6,7 +6,7 @@ run_postinstall() {
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     e_header "Have launchd start homebrew/apache/httpd24 now and restart at startup"
-    sudo brew services start homebrew/apache/httpd24
+    sudo brew services start httpd
     [[ $? ]] && e_success "Done"
 
     e_header "create a self-signed certificate"

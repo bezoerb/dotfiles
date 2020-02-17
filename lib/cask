@@ -36,7 +36,6 @@ run_cask() {
 
             # browsers
             'firefox'
-            'firefox-nightly'
 
             # less often
             'gpg-suite'
