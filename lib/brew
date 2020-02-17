@@ -25,15 +25,7 @@ run_brew() {
         sudo brew services start httpd
         [[ $? ]] && e_success "Done"
 
-        #switch from SecureTransport
-        if $(brew info curl | grep with-openssl >/dev/null 2>&1); then
-            e_success "curl with openssl support already installed."
-        else
-            e_header "reinstall curl with openssl support"
-            brew reinstall --with-openssl curl
-            [[ $? ]] && e_success "Done"
-        fi
-
+    
         e_header "Checking status of desired Homebrew formulae..."
         local list_formulae
         local -a missing_formulae
