@@ -14,7 +14,6 @@ dirs_to_append=(
     "$HOME/Library/Android/sdk/tools"
     "$HOME/Library/Android/sdk/tools/bin"
     "$HOME/.dotfiles/bin"
-    "$HOME/.rvm/bin"
     "$(brew --prefix ruby)/bin"
     "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
     "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin

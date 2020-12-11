@@ -22,7 +22,6 @@ run_cask() {
             # dev
            # 'sublime-text'
             'phpstorm'
-            'visual-studio-code'
             'imagealpha'
             'imageoptim'
             'sequel-pro'

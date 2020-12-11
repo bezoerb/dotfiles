@@ -85,7 +85,7 @@ run_postinstall() {
 
     # https://rvm.io
     # rvm for the rubiess
-    curl -L https://get.rvm.io | bash -s stable --ruby
+    #curl -L https://get.rvm.io | bash -s stable --ruby
 
     # create bin dir
     mkdir -p ${HOME}/bin
