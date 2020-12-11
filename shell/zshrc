@@ -16,7 +16,9 @@ load_dotfiles() {
         $HOME/.dotfiles/shell/aliases.zsh # Aliases
         $HOME/.dotfiles/shell/functions/* # Functions
         $HOME/.dotfiles/shell/paths.zsh # Path modifications
+        /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
         $HOME/.localrc # Local and private settings not under version control (e.g. git credentials)
+
     )
 
     # if these files are readable, source them
