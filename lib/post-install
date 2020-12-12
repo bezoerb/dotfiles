@@ -9,7 +9,7 @@ run_postinstall() {
     sudo brew services start httpd
     [[ $? ]] && e_success "Done"
 
-  
+    mkcert -install 
 
     e_header "Configure apache/httpd"
     
@@ -54,6 +54,8 @@ run_postinstall() {
     # set zsh as default shell
     chsh -s `which zsh`
     [[ $? ]] && e_success "Done"
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
     e_header "Adding git-friendly..."
     # https://github.com/jamiew/git-friendly
