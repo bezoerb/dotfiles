@@ -8,12 +8,12 @@ export LANG="de_DE"
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-# Symfony default environments
-export SYMFONY_ENV=dev
-export SYMFONY_DEBUG=true
 
 # Fix for phantomjs
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
 export EDITOR=/usr/bin/vim
 
 export ANDROID_HOME=~/Library/Android/sdk 
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

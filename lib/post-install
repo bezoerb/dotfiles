@@ -43,8 +43,9 @@ run_postinstall() {
     [[ $? ]] && e_success "Done"
 
     e_header "Install php switcher script"
-    curl -L https://gist.githubusercontent.com/rhukster/f4c04f1bf59e0b74e335ee5d186a98e2/raw > /usr/local/bin/sphp
+    curl -L https://gist.githubusercontent.com/rhukster/f4c04f1bf59e0b74e335ee5d186a98e2/raw/0c36a5067fbd63e6a36700a6aaa119df0836bdfc/sphp.sh > /usr/local/bin/sphp
     chmod +x /usr/local/bin/sphp
+
 
     e_header "Setting up oh-my-zsh..."
     # zsh / oh-my-zsh
@@ -117,7 +118,12 @@ run_postinstall() {
 
 
     # Install php extensions
-    printf "\n" | pecl uninstall -r apcu && pecl install apcu && pecl uninstall -r yaml && pecl install yaml && pecl uninstall -r xdebug && pecl install xdebug &&  pecl uninstall -r igbinary && pecl install igbinary   &&  pecl uninstall -r memcached && pecl install memcached  &&  pecl uninstall -r imagick && pecl install imagick  
+    printf "\n" | pecl uninstall -r apcu && pecl install apcu 
+    printf "\n" | pecl uninstall -r yaml && pecl install yaml 
+    printf "\n" | pecl uninstall -r xdebug && pecl install xdebug
+    printf "\n" | pecl uninstall -r igbinary && pecl install igbinary 
+    printf "\n" | pecl uninstall -r memcached && pecl install memcached  
+    printf "\n" | pecl uninstall -r imagick && pecl install imagick  
     
 
     # Remove extensions in php ini's
