@@ -61,6 +61,7 @@ run_brew() {
             'grep'
             'screen'
             'mtr' # mtr - ping & traceroute. best.
+            'duf'
 
             # dev
             'php'
@@ -70,6 +71,7 @@ run_brew() {
             'hugo'
             'yarn'
             'mariadb'
+            'pipenv'
 
             # tools
             'ssh-copy-id'
