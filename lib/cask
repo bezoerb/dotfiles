@@ -14,18 +14,17 @@ run_cask() {
             # daily
             'spectacle'
             'dropbox'
-           # 'flux'
             'alfred'
-           # 'caffeine'
             'slack'
 
             # dev
-           # 'sublime-text'
+            'sublime-text'
             'phpstorm'
             'imagealpha'
             'imageoptim'
             'sequel-pro'
             'ngrok'
+            'postman'
 
             #graphics
             'sketch'
