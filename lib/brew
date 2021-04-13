@@ -80,7 +80,7 @@ run_brew() {
             'rename' # http://plasmasturm.org/code/rename/
 
             # media
-            'ffmpeg '
+            'ffmpeg'
             'imagemagick'
             'gifsicle'
             'graphicsmagick'
