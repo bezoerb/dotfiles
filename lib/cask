@@ -19,6 +19,7 @@ run_cask() {
 
             # dev
             'sublime-text'
+            'visual-studio-code'
             'phpstorm'
             'imagealpha'
             'imageoptim'
