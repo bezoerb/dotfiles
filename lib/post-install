@@ -64,6 +64,10 @@ run_postinstall() {
     bash -c "$(curl -fsSL raw.githubusercontent.com/jamiew/git-friendly/master/install.sh)"
     [[ $? ]] && e_success "Done"
 
+    # Add nvm && nvm auto-use
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+    git clone https://github.com/Sparragus/zsh-auto-nvm-use ~/.oh-my-zsh/custom/plugins/zsh-auto-nvm-use
+
      # allow mtr to run without sudo
     mtrlocation=$(brew info mtr | grep Cellar | sed -e 's/ (.*//') #  e.g. `/Users/paulirish/.homebrew/Cellar/mtr/0.86`
     sudo chmod 4755 $mtrlocation/sbin/mtr

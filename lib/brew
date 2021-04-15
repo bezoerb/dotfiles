@@ -73,7 +73,9 @@ run_brew() {
             'mariadb'
             'pipenv'
 
+
             # tools
+            'grex'
             'ssh-copy-id'
             'testssl'
             'rsync'
