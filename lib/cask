@@ -19,7 +19,6 @@ run_cask() {
             # dev
             'sublime-text'
             'visual-studio-code'
-            'phpstorm'
             'imagealpha'
             'imageoptim'
             'postman'
@@ -27,17 +26,9 @@ run_cask() {
             #graphics
             'sketch'
 
-            # fun
-            'caprine'
-
-            # browsers
-            'firefox'
-
             # less often
             'gpg-suite'
-            'reeder'
             'licecap'
-            'transmission'
             'clipgrab'
             'kap'
 
