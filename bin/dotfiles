@@ -34,31 +34,34 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
 fi
 
 # Test for known flags
-for opt in $@
-do
+for opt in $@; do
     case $opt in
-        --no-packages) no_packages=true ;;
-        --no-sync) no_sync=true ;;
-        -*|--*) e_warning "Warning: invalid option $opt" ;;
+    --no-packages) no_packages=true ;;
+    --no-sync) no_sync=true ;;
+    -* | --*) e_warning "Warning: invalid option $opt" ;;
     esac
 done
 
 # Ask for the administrator password upfront
 sudo -v
 # Keep-alive: update existing `sudo` time stamp until `we are` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+done 2>/dev/null &
 
 # XCode Command Line Tools
 # thx https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
-if ! xcode-select --print-path &> /dev/null; then
+if ! xcode-select --print-path &>/dev/null; then
 
     # Prompt user to install the XCode Command Line Tools
-    xcode-select --install &> /dev/null
+    xcode-select --install &>/dev/null
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Wait until the XCode Command Line Tools are installed
-    until xcode-select --print-path &> /dev/null; do
+    until xcode-select --print-path &>/dev/null; do
         sleep 5
     done
 
@@ -94,7 +97,7 @@ fi
 # Check for Homebrew
 if ! type_exists 'brew'; then
     e_header "Installing Homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 # Fix directories for OSX High sierra
@@ -147,13 +150,13 @@ if [[ $no_packages ]]; then
 else
     printf "Updating packages...\n"
     # Install Homebrew formulae
-    run_brew
+    # run_brew
     # Install Homebrew casks
     run_cask
     # install things besides homebrew & configure tools like dnsmasq
     run_postinstall
     # Install Node packages
-    run_npm
+    #run_npm
 fi
 
 link() {
@@ -161,13 +164,11 @@ link() {
     ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
-local_gitconfig () {
-    if ! [ -f ${HOME}/.gitconfig.local ]
-    then
+local_gitconfig() {
+    if ! [ -f ${HOME}/.gitconfig.local ]; then
         git_credential='cache'
-        if [ "$(uname -s)" == "Darwin" ]
-        then
-          git_credential='osxkeychain'
+        if [ "$(uname -s)" == "Darwin" ]; then
+            git_credential='osxkeychain'
         fi
 
         user ' - What is your github author name?'
@@ -175,7 +176,7 @@ local_gitconfig () {
         user ' - What is your github author email?'
         read -e git_authoremail
 
-        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" ${DOTFILES_DIRECTORY}/git/gitconfig.local.template > ${HOME}/.gitconfig.local
+        sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" ${DOTFILES_DIRECTORY}/git/gitconfig.local.template >${HOME}/.gitconfig.local
 
         e_success "Created ~/.gitconfig.local"
     fi
@@ -186,7 +187,7 @@ mirrorfiles() {
 
     # Any global git commands will be written to `.gitconfig`.
     # This prevents them being committed to the repository.
-    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig ${HOME}/.gitconfig
 
     # Force remove the vim directory if it's already there.
     if [ -e "${HOME}/.vim" ]; then
@@ -196,15 +197,15 @@ mirrorfiles() {
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
     # `.dotfiles` repository.
-    link "shell/zshrc"        ".zshrc"
-    link "shell/ackrc"        ".ackrc"
-    link "shell/curlrc"       ".curlrc"
-    link "shell/dircolors"    ".dircolors"
-    link "git/gitattributes"  ".gitattributes"
-    link "git/gitignore"      ".gitignore"
-    link "vim"                ".vim"
-    link "vim/gvimrc"         ".gvimrc"
-    link "vim/vimrc"          ".vimrc"
+    link "shell/zshrc" ".zshrc"
+    link "shell/ackrc" ".ackrc"
+    link "shell/curlrc" ".curlrc"
+    link "shell/dircolors" ".dircolors"
+    link "git/gitattributes" ".gitattributes"
+    link "git/gitignore" ".gitignore"
+    link "vim" ".vim"
+    link "vim/gvimrc" ".gvimrc"
+    link "vim/vimrc" ".vimrc"
 
     e_success "Dotfiles update complete!"
 }
@@ -230,4 +231,3 @@ fi
 #else
 #    printf "Skipped OS X settings update.\n"
 #fi
-

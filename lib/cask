@@ -13,7 +13,6 @@ run_cask() {
         local -a desired_casks=(
             # daily
             'spectacle'
-            'dropbox'
             'alfred'
             'slack'
 
@@ -23,8 +22,6 @@ run_cask() {
             'phpstorm'
             'imagealpha'
             'imageoptim'
-            'sequel-pro'
-            'ngrok'
             'postman'
 
             #graphics
@@ -57,8 +54,7 @@ run_cask() {
             'suspicious-package'
         )
 
-        for index in ${!desired_casks[*]}
-        do
+        for index in ${!desired_casks[*]}; do
             if ! cask_exists ${desired_casks[$index]}; then
                 # Store the name (and options) of every missing formula
                 missing_casks=("${missing_casks[@]}" "${desired_casks[$index]}")
@@ -67,7 +63,7 @@ run_cask() {
 
         if [[ "$missing_casks" ]]; then
             # Convert the array of missing formula into a list of space-separate strings
-            list_casks=$( printf "%s " "${missing_casks[@]}" )
+            list_casks=$(printf "%s " "${missing_casks[@]}")
 
             e_header "Installing missing Homebrew cask..."
 
