@@ -12,7 +12,7 @@ bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
 # plugins
-plugins=(git history colorize gitignore wp-cli z zsh-auto-nvm-use)
+plugins=(git history colorize gitignore zsh-auto-nvm-use)
 
 # hook in oh my zsh
 source $ZSH/oh-my-zsh.sh
@@ -25,7 +25,3 @@ setopt dotglob
 #ulimit -u 2048
 
 zstyle ':completion:*' use-cache yes
-
-
-
-
