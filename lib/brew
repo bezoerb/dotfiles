@@ -13,25 +13,30 @@ run_brew() {
         brew upgrade
         [[ $? ]] && e_success "Done"
 
+        # Install GNU `sed`, overwriting the built-in `sed`.
+        brew install gnu-sed
+
+        # font tools.
+        brew tap bramstein/webfonttools
+
         # disable macos apache before install
         sudo apachectl stop
         sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
 
-        if ! formula_exists httpd24; then
+        if ! formula_exists httpd; then
             brew install httpd
         fi
 
-        e_header "Have launchd start homebrew/apache/httpd24 now and restart at startup"
-        sudo brew services start httpd
+        e_header "Have launchd start homebrew/apache/httpd now and restart at startup"
+        brew services start httpd
         [[ $? ]] && e_success "Done"
 
-    
         e_header "Checking status of desired Homebrew formulae..."
         local list_formulae
         local -a missing_formulae
         local -a desired_formulae=(
             # GNU core utilities (those that come with OS X are outdated)
-            'openldap' 
+            'openldap'
             'libiconv'
             'coreutils'
             'moreutils'
@@ -40,17 +45,27 @@ run_brew() {
             # git
             'git'
             'git-lfs'
-            'hub'
             'git-extras'
             'diff-so-fancy'
+            'gh'
+
+            # font tools
+            'sfnt2woff'
+            'sfnt2woff-zopfli'
+            'woff2'
 
             # system
+            'openssl'
+            'openssh'
             'dnsmasq'
+            'gnupg'
             'libmemcached'
             'libyaml'
             'icu4c'
             'mkcert'
             'nss'
+            'binwalk'
+            'binutils'
 
             # shell
             'zsh'
@@ -61,28 +76,27 @@ run_brew() {
             'grep'
             'screen'
             'mtr' # mtr - ping & traceroute. best.
-            'duf'
+            'zoxide'
+            'fzf'
 
             # dev
             'php'
+            'bfg'
             'python'
             'node'
             'go'
             'hugo'
             'yarn'
             'mariadb'
-            'pipenv'
-
 
             # tools
-            'grex'
             'ssh-copy-id'
             'testssl'
             'rsync'
             'rename' # http://plasmasturm.org/code/rename/
 
             # media
-            'ffmpeg'
+            'ffmpeg '
             'imagemagick'
             'gifsicle'
             'graphicsmagick'
@@ -92,8 +106,7 @@ run_brew() {
             'youtube-dl'
         )
 
-        for index in ${!desired_formulae[*]}
-        do
+        for index in ${!desired_formulae[*]}; do
             if ! formula_exists ${desired_formulae[$index]}; then
                 # Store the name (and options) of every missing formula
                 missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
@@ -102,7 +115,7 @@ run_brew() {
                 brew install ${desired_formulae[$index]}
             fi
         done
-        
+
         # Remove outdated versions from the Cellar
         brew cleanup
     else
