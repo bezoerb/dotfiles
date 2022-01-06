@@ -9,6 +9,9 @@ run_postinstall() {
         kill -0 "$$" || exit
     done 2>/dev/null &
 
+    # Remove the quarantine attribute for quicklook plugins
+    xattr -d -r com.apple.quarantine ~/Library/QuickLook
+
     e_header "Have launchd start httpd now and restart at startup"
     sudo brew services start httpd
     [[ $? ]] && e_success "Done"

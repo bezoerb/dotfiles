@@ -104,6 +104,17 @@ run_brew() {
             'zopfli'
             'jpeg'
             'youtube-dl'
+
+            # Quick Look plugins
+            'qlcolorcode'
+            'qlstephen'
+            'qlmarkdown'
+            'quicklook-json'
+            'qlimagesize'
+            'suspicious-package'
+            'apparency'
+            'quicklookase'
+            'qlvideo'
         )
 
         for index in ${!desired_formulae[*]}; do

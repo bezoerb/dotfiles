@@ -31,18 +31,6 @@ run_cask() {
             'licecap'
             'clipgrab'
             'kap'
-
-            # QuickLook plugins
-            'qlcolorcode'
-            'qlstephen'
-            'qlmarkdown'
-            'quicklook-json'
-            'qlprettypatch'
-            'quicklook-csv'
-            'betterzip'
-            'qlimagesize'
-            'webpquicklook'
-            'suspicious-package'
         )
 
         for index in ${!desired_casks[*]}; do

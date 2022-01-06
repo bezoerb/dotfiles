@@ -83,6 +83,11 @@ cask_exists() {
     return 0
   fi
 
+  if $(ls -la ~/Applications | grep -i $1 >/dev/null 2>&1); then
+    e_success "$1 already installed."
+    return 0
+  fi
+
   e_warning "Missing cask: $1"
   return 1
 }
