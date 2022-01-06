@@ -25,6 +25,8 @@ run_cask() {
 
             #graphics
             'sketch'
+            'tinypng4mac'
+            'handbrake'
 
             # less often
             'gpg-suite'
