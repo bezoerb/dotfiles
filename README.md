@@ -55,119 +55,14 @@ Options:
 </table>
 
 
-## Features
 
-### Automatic software installation
-
-Homebrew formulae:
-
-* GNU core utilities
-* [git](http://git-scm.com/)
-* [hub](https://github.com/github/hub)
-* [git-extras](https://github.com/tj/git-extras)
-* dnsmasq
-* libmemcached
-* zsh
-* bash (latest version)
-* [bash-completion](http://bash-completion.alioth.debian.org/)
-* [tree](https://linux.die.net/man/1/tree)
-* [ack](http://betterthangrep.com/)
-* gnu-sed (GNU version of sed)
-* grep (GNU grep)
-* screen (GNU screen)
-* [wget](http://www.gnu.org/software/wget/)
-* mtr (ping & traceroute. best)
-* php56 + modules: imagick, intl, xdebug, mcrypt, memcached, opcache, apcu
-* php70 + modules: imagick, intl, xdebug, mcrypt, memcached, opcache, apcu
-* [xdebug-osx](https://github.com/w00fz/xdebug-osx)
-* [python](https://www.python.org/)
-* [node](http://nodejs.org/)
-* [yarn](https://yarnpkg.com/)
-* [mariadb](https://mariadb.org/)
-* [macvim](http://code.google.com/p/macvim/)
-* [rsync](https://rsync.samba.org/) (latest version, rather than the out-dated OS X installation)
-* ssh-copy-id
-* testssl
-* [rename](http://plasmasturm.org/code/rename/)
-* [ffmpeg](http://ffmpeg.org/)
-* [imagemagick](http://www.imagemagick.org/)
-* [graphicsmagick](http://www.graphicsmagick.org/)
-* [jpeg](https://en.wikipedia.org/wiki/Libjpeg)
-* [optipng](http://optipng.sourceforge.net/)
-* [zopfli](https://github.com/google/zopfli)
-
-Cask:
-
-* spectacle
-* dropbox
-* flux
-* alfred
-* caffeine
-* slack
-* xquarts
-* iterm2
-* sublime-text
-* atom
-* webstorm
-* phpstorm
-* visual-studio-code
-* imagealpha
-* imageoptim
-* sequel-pro
-* ngrok
-* dash
-* sketch
-* caprine
-* google-chrome
-* google-chrome-canary
-* firefox
-* firefoxnightly
-* webkit-nightly
-* gpgtools
-* reeder
-* licecap
-* transmission
-* qlcolorcode
-* qlstephen
-* qlmarkdown
-* quicklook-json
-* qlprettypatch
-* quicklook-csv
-* betterzipql
-* webpquicklook
-* suspicious-package
-
-Node packages:
-
-* [gify](https://github.com/visionmedia/node-gify)
-* [yo](http://yeoman.io/)
-* [gulp](http://gulpjs.com/)
-* [grunt](http://gruntjs.com/)
-* [bower](https://bower.io/)
-* [jspm](http://jspm.io/)
-* [ava](https://github.com/avajs/ava)
-* [xo](https://github.com/sindresorhus/xo)
-* [eslint](http://eslint.org/)
-
-Additional:
-
-* [sphp](https://gist.github.com/w00fz/142b6b19750ea6979137b963df959d11) php switcher script
-* [oh-my-zsh](http://ohmyz.sh/)
-* [Dropbox-Uploader](https://github.com/andreafabrizi/Dropbox-Uploader)
-* [wp-cli](https://wp-cli.org/)
-* [SpoofMAC](https://github.com/feross/SpoofMAC)
-* [pygments](http://pygments.org/)
-* [git-friendly](https://github.com/jamiew/git-friendly)
-
-
-
-### Custom OS X defaults
+### Custom macOS defaults
 
 Custom OS X settings can be applied during the `dotfiles` process. They can
 also be applied independently by running the following command:
 
 ```bash
-$ osxdefaults
+$ macosdefaults
 ```
 
 ## Acknowledgements
