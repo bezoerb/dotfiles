@@ -2,6 +2,7 @@
 declare -a dirs_to_prepend
 dirs_to_prepend=(
     "/usr/local/bin"
+    "$FNM_MULTISHELL_PATH/bin"
 )
 
 # Directories to be appended to PATH
