@@ -88,6 +88,7 @@ run_brew() {
             'hugo'
             'yarn'
             'mariadb'
+            'cheat'
 
             # tools
             'ssh-copy-id'
