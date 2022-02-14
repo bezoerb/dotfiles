@@ -1,4 +1,7 @@
 # Directories to be prepended to PATH
+
+export PATH="/opt/homebrew/bin:$PATH"
+
 declare -a dirs_to_prepend
 dirs_to_prepend=(
     "/usr/local/bin"

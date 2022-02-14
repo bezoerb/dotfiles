@@ -78,6 +78,7 @@ run_brew() {
             'mtr' # mtr - ping & traceroute. best.
             'zoxide'
             'fzf'
+            'fnm'
 
             # dev
             'php'

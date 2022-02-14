@@ -111,6 +111,7 @@ sudo mkdir -p /usr/local/bin
 sudo mkdir -p /usr/local/var
 sudo mkdir -p /usr/local/etc
 
+
 # Check for git
 if ! type_exists 'git'; then
     e_header "Updating Homebrew..."
