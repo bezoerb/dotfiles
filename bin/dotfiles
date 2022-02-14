@@ -110,7 +110,6 @@ sudo mkdir -p /usr/local/sbin
 sudo mkdir -p /usr/local/bin
 sudo mkdir -p /usr/local/var
 sudo mkdir -p /usr/local/etc
-sudo chown -R $(whoami) $(brew --prefix)/*
 
 # Check for git
 if ! type_exists 'git'; then
