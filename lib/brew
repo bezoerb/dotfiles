@@ -106,6 +106,8 @@ run_brew() {
             'zopfli'
             'jpeg'
             'youtube-dl'
+            'awscli'
+            'contentful-cli'
 
             # Quick Look plugins
             'qlcolorcode'
