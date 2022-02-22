@@ -19,6 +19,9 @@ alias where=which # sometimes i forget
 alias brwe=brew
 alias igt=git
 
+# grow
+alias grow='pipenv run grow'
+
 # zsh
 alias zshconfig="subl ~/.zshrc"
 alias ohmyzsh="subl ~/.oh-my-zsh"

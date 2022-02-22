@@ -50,7 +50,7 @@ _fnm_autoload_hook () {
     fnm use --install-if-missing
   elif [ $FNM_USING_LOCAL_VERSION -eq 1 ]; then
     FNM_USING_LOCAL_VERSION=0
-    fnm use default --install-if-missing
+    fnm use --version-file-strategy=recursive --install-if-missing
   fi
 }
 
