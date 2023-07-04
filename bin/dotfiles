@@ -3,7 +3,7 @@
 # dotfiles startup script taken from necolas
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-DOTFILES_TARBALL_PATH="https://github.com/bezoerb/dotfiles/tarball/master"
+DOTFILES_TARBALL_PATH="https://github.com/bezoerb/dotfiles/tarball/main"
 DOTFILES_GIT_REMOTE="git@github.com:bezoerb/dotfiles.git"
 
 # If missing, download and extract the dotfiles repository
@@ -125,7 +125,7 @@ if ! is_git_repo; then
     e_header "Initializing git repository..."
     git init
     git remote add origin ${DOTFILES_GIT_REMOTE}
-    git fetch origin master
+    git fetch origin main
     # Reset the index and working tree to the fetched HEAD
     # (submodules are cloned in the subsequent sync step)
     git reset --hard FETCH_HEAD
@@ -139,7 +139,7 @@ if [[ $no_sync ]]; then
 else
     e_header "Syncing dotfiles..."
     # Pull down the latest changes
-    git pull --rebase origin master
+    git pull --rebase origin main
     # Update submodules
     git submodule update --recursive --init --quiet
 fi
