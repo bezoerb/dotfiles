@@ -1,8 +1,21 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+
+autoload -U promptinit; promptinit
+
 # Set name of the theme to load.
 ZSH_THEME="pure"
+
+
+# change the path color
+zstyle :prompt:pure:path color white
+
+# change the color for both `prompt:success` and `prompt:error`
+#zstyle ':prompt:pure:prompt:*' color cyan
+
+# turn on git stash status
+zstyle :prompt:pure:git:stash show yes
 
 # Disable command autocorrection
 DISABLE_CORRECTION="true"

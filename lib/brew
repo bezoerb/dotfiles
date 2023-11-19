@@ -90,6 +90,7 @@ run_brew() {
             'yarn'
             'mariadb'
             'cheat'
+            'grex'
 
             # tools
             'ssh-copy-id'

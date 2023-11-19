@@ -22,6 +22,14 @@ run_cask() {
             'imagealpha'
             'imageoptim'
             'postman'
+            'obsidian'
+
+            # browsers
+            'google-chrome'
+            'google-chrome-canary'
+            'firefox'
+            'arc'
+            'brave-browser'
 
             #graphics
             'sketch'
