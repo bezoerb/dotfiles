@@ -25,27 +25,27 @@ run_postinstall() {
 
     # load dev modules
     sudo sed -i -e "/LoadModule rewrite_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "/LoadModule deflate_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "/LoadModule expires_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "/LoadModule ssl_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "/LoadModule http2_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "/LoadModule socache_shmcb_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "/LoadModule vhost_alias_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "/httpd-ssl.conf/s/^#//" $apacheConf &&
-        sudo sed -i -e "/php5_module/s/^#*/#/" $apacheConf &&
-        sudo sed -i -e "/php7_module/s/^#//" $apacheConf &&
-        sudo sed -i -e "s/DirectoryIndex index.html/DirectoryIndex index.php index.html/g" $apacheConf &&
-        sudo sed -i -e "s/User daemon/User _www/g" $apacheConf &&
-        sudo sed -i -e "s/Group daemon/Group _www/g" $apacheConf &&
-        sudo sed -i -r "s/^Listen 80\d+/Listen 80/g" $apacheConf &&
-        mkdir -p /Users/$(whoami)/Sites &&
-        sudo sed -i -e "s/\/usr\/local\/var\/www\/htdocs/\/Users\/$(whoami)\/Sites/g" $apacheConf &&
-        sudo sed -i -r "s/#ServerName.*/ServerName localhost/" $apacheConf &&
-        echo "" >>$apacheConf &&
-        echo "<FilesMatch \.php$>" >>$apacheConf &&
-        echo "    SetHandler application/x-httpd-php" >>$apacheConf &&
-        echo "</FilesMatch>" >>$apacheConf &&
-        sudo apachectl -k restart
+    sudo sed -i -e "/LoadModule deflate_module/s/^#//" $apacheConf &&
+    sudo sed -i -e "/LoadModule expires_module/s/^#//" $apacheConf &&
+    sudo sed -i -e "/LoadModule ssl_module/s/^#//" $apacheConf &&
+    sudo sed -i -e "/LoadModule http2_module/s/^#//" $apacheConf &&
+    sudo sed -i -e "/LoadModule socache_shmcb_module/s/^#//" $apacheConf &&
+    sudo sed -i -e "/LoadModule vhost_alias_module/s/^#//" $apacheConf &&
+    sudo sed -i -e "/httpd-ssl.conf/s/^#//" $apacheConf &&
+    sudo sed -i -e "/php5_module/s/^#*/#/" $apacheConf &&
+    sudo sed -i -e "/php7_module/s/^#//" $apacheConf &&
+    sudo sed -i -e "s/DirectoryIndex index.html/DirectoryIndex index.php index.html/g" $apacheConf &&
+    sudo sed -i -e "s/User daemon/User _www/g" $apacheConf &&
+    sudo sed -i -e "s/Group daemon/Group _www/g" $apacheConf &&
+    sudo sed -i -r "s/^Listen 80\d+/Listen 80/g" $apacheConf &&
+    mkdir -p /Users/$(whoami)/Sites &&
+    sudo sed -i -e "s/\/usr\/local\/var\/www\/htdocs/\/Users\/$(whoami)\/Sites/g" $apacheConf &&
+    sudo sed -i -r "s/#ServerName.*/ServerName localhost/" $apacheConf &&
+    echo "" >>$apacheConf &&
+    echo "<FilesMatch \.php$>" >>$apacheConf &&
+    echo "    SetHandler application/x-httpd-php" >>$apacheConf &&
+    echo "</FilesMatch>" >>$apacheConf &&
+    sudo apachectl -k restart
     [[ $? ]] && e_success "Done"
 
     e_header "Install php switcher script"
