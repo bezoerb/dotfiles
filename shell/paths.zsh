@@ -8,6 +8,7 @@ dirs_to_prepend=(
     "$FNM_MULTISHELL_PATH/bin"
 )
 
+
 # Directories to be appended to PATH
 declare -a dirs_to_append
 dirs_to_append=(
@@ -18,8 +19,10 @@ dirs_to_append=(
  #   "$HOME/Library/Android/sdk/tools"
  #   "$HOME/Library/Android/sdk/tools/bin"
     "$HOME/.dotfiles/bin"
+    "/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/bin" # Add brew-installed GNU core utilities bin
     "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
     "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
+    "$(brew --prefix)/sbin" # Homebrew's "sbin"
     "$(brew --prefix php)/bin" # Add php
 )
 

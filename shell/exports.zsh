@@ -7,10 +7,15 @@ export LANG="de_DE"
 
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+
 # Make vim the default editor.
 export EDITOR=/usr/bin/vim
 
 export ANDROID_HOME=~/Library/Android/sdk
+
+export JAVA_HOME=$(/usr/libexec/java_home -v1.8)
 
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656

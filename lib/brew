@@ -92,6 +92,7 @@ run_brew() {
             'mariadb'
             'cheat'
             'grex'
+            'nginx'
 
             # tools
             'ssh-copy-id'
