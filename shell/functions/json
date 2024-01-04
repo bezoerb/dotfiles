@@ -1,12 +1,30 @@
 #!/bin/bash
 
 # Syntax-highlight JSON strings or files
+
+cmd_exists() {
+  TYPE=$(type -p $1);
+  if [ -n "$TYPE" ]; then
+    return 0
+  fi
+  return 1
+}
+
+
 function json() {
 	if [ -p /dev/stdin ]; then
 		# piping, e.g. `echo '{"foo":42}' | json`
-		python -mjson.tool | pygmentize -l javascript
+    if ! cmd_exists 'python3'; then
+		  python -mjson.tool | pygmentize -l javascript
+    else
+      python3 -mjson.tool | pygmentize -l javascript
+    fi
 	else
 		# e.g. `json '{"foo":42}'`
-		python -mjson.tool <<< "$*" | pygmentize -l javascript
+    if ! cmd_exists 'python3'; then
+      python -mjson.tool <<< "$*" | pygmentize -l javascript
+    else
+      python3 -mjson.tool <<< "$*" | pygmentize -l javascript
+    fi
 	fi
 }
