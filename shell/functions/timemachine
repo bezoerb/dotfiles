@@ -1,7 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 #set -x
-
-
 
 function timemachine() {
     EXCLUDEFOLDERNAME=${3:-"node_modules"}
