@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Do a Matrix movie effect of falling characters
-function matrix1() {
+function matrix() {
   echo -e "\e[1;40m"
   clear
   while :; do
