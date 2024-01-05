@@ -85,6 +85,26 @@ alias hosts='sudo $EDITOR /etc/hosts'
 
 alias spoof-mac="spoof-mac.py"
 
+# Define pbcopy using xsel if they're not already defined
+if ! type -p "pbcopy" > /dev/null; then
+  alias pbcopy='xsel --clipboard --input'
+fi
+if ! type -p "pbpaste" > /dev/null; then
+  alias pbpaste='xsel --clipboard --output'
+fi
+
+# Clear terminal and empty scrollback
+alias clear='printf "\ec"'
+
+# Random fact
+alias fact="elinks -dump randomfunfacts.com | sed -n '/^| /p' | tr -d \|"
+
+# Recursive directory listing
+alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
+
+# Find the biggest folder
+alias ds='du -ks *|sort -n'
+
 # here's LS_COLORS
 # github.com/trapd00r/LS_COLORS
 command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"

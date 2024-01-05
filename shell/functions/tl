@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Tail with search highlight
+tl() {
+  tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
+}

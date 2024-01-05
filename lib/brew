@@ -98,6 +98,7 @@ run_brew() {
             'ssh-copy-id'
             'testssl'
             'rsync'
+            'felinks'
             'rename' # http://plasmasturm.org/code/rename/
 
             # media

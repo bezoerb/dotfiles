@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Find text in any file
+function ft() {
+  find . -name "${2:-*}" | xargs grep -l "$1"
+}

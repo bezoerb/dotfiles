@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Paginated colored tree
+ltree() {
+  tree -C $* | less -R
+}
