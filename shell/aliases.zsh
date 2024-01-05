@@ -105,6 +105,17 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 # Find the biggest folder
 alias ds='du -ks *|sort -n'
 
+#
+# OCR on an image in the clipboard.
+# From https://mastodon.social/@aparrish/100804983641371950
+#
+# Prerequisites on macOS:
+# brew install imagemagick pngpaste tesseract
+#
+alias ocr-paste='pngpaste - | tesseract stdin stdout'
+alias ocr-paste2x='pngpaste - | convert - -resize 200% - | tesseract stdin stdout'
+alias ocr-paste4x='pngpaste - | convert - -resize 400% - | tesseract stdin stdout'
+
 # here's LS_COLORS
 # github.com/trapd00r/LS_COLORS
 command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"

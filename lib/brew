@@ -112,6 +112,8 @@ run_brew() {
             'youtube-dl'
             'awscli'
             'contentful-cli'
+            'pngpaste'
+            'tesseract'
 
             # Quick Look plugins
             'qlcolorcode'
