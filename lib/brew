@@ -80,6 +80,7 @@ run_brew() {
             'zoxide'
             'fzf'
             'fnm'
+            'gawk'
 
             # dev
             'php'
