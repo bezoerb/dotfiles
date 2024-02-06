@@ -85,6 +85,8 @@ alias hosts='sudo $EDITOR /etc/hosts'
 
 alias spoof-mac="spoof-mac.py"
 
+alias matrix="cmatrix"
+
 # Define pbcopy using xsel if they're not already defined
 if ! type -p "pbcopy" > /dev/null; then
   alias pbcopy='xsel --clipboard --input'

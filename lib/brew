@@ -42,6 +42,9 @@ run_brew() {
             'moreutils'
             'findutils'
 
+            # fun
+            'cmatrix'
+
             # git
             'git'
             'git-lfs'
