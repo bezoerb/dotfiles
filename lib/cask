@@ -12,7 +12,7 @@ run_cask() {
         local -a missing_casks
         local -a desired_casks=(
             # daily
-            'spectacle'
+            'rectangle'
             'alfred'
             'slack'
 
