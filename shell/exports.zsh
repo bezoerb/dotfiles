@@ -17,6 +17,8 @@ export ANDROID_HOME=~/Library/Android/sdk
 
 export JAVA_HOME=$(/usr/libexec/java_home -v1.8)
 
+export PYTHON=`which python3`
+
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty)

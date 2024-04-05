@@ -150,13 +150,13 @@ if [[ $no_packages ]]; then
 else
     printf "Updating packages...\n"
     # Install Homebrew formulae
-    run_brew
+    # run_brew
     # Install Homebrew casks
-    run_cask
+    # run_cask
     # install things besides homebrew & configure tools like dnsmasq
     run_postinstall
     # Install Node packages
-    run_npm
+    # run_npm
 fi
 
 link() {
