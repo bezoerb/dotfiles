@@ -34,6 +34,10 @@ alias apacheconfig="subl $(dirname $(httpd -V | grep -i server_config_file | cut
 alias android_emulator="~/Library/Android/sdk/emulator/emulator @Nexus_5X_API_28_x86  -dns-server 8.8.8.8"
 alias emulator_dev_menu="adb shell input keyevent 82"
 
+# switch arm & x86 terminal
+alias x86="$env /usr/bin/arch -x86_64 /bin/zsh ---login"
+alias arm="$env /usr/bin/arch -arm64 /bin/zsh ---login"
+
 ###
 # time to upgrade `ls`
 # use coreutils `ls` if possible…

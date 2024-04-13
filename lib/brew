@@ -104,6 +104,7 @@ run_brew() {
             'rsync'
             'felinks'
             'rename' # http://plasmasturm.org/code/rename/
+            'fx'
 
             # media
             'ffmpeg'
