@@ -33,6 +33,8 @@ load_dotfiles() {
 load_dotfiles
 unset load_dotfiles
 
+source <(fzf --zsh)
+
 # Add zoxide to your shell
 # https://github.com/ajeetdsouza/zoxide#step-2-add-zoxide-to-your-shell
 compinit

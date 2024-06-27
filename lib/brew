@@ -82,6 +82,8 @@ run_brew() {
             'mtr' # mtr - ping & traceroute. best.
             'zoxide'
             'fzf'
+            'fd'
+            'bat'
             'fnm'
             'gawk'
 
