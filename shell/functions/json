@@ -26,5 +26,6 @@ function json() {
     else
       python3 -mjson.tool <<< "$*" | pygmentize -l javascript
     fi
+
 	fi
 }
