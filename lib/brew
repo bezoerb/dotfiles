@@ -85,6 +85,8 @@ run_brew() {
             'fd'
             'bat'
             'fnm'
+            'hexyl'
+            'pastel'
             'gawk'
 
             # dev
