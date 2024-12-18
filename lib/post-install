@@ -16,6 +16,9 @@ run_postinstall() {
     # Remove the quarantine attribute for quicklook plugins
     xattr -d -r com.apple.quarantine ~/Library/QuickLook
 
+    # zsh-z
+    git clone https://github.com/agkozak/zsh-z ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-z
+
 
     mkcert -install
 

@@ -25,7 +25,7 @@ bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 
 # plugins
-plugins=(git history colorize gitignore)
+plugins=(git history colorize gitignore zsh-z)
 
 # hook in oh my zsh
 source $ZSH/oh-my-zsh.sh
