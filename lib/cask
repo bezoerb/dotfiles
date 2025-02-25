@@ -28,7 +28,7 @@ run_cask() {
             'google-chrome'
             'google-chrome-canary'
             'firefox'
-            'arc'
+            'vivaldi'
             'brave-browser'
 
             #graphics
