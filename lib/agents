@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Set up ~/.agents:
+# - symlinks personal agent definitions and the Skills CLI lockfile
+#   into ~/.agents from the dotfiles repo
+# - restores skills via the Skills CLI
+#
+# Skills are NOT vendored in this repo. The lockfile (.skill-lock.json)
+# is the source of truth and `npx skills` rehydrates ~/.agents/skills/.
+
+run_agents() {
+    e_header "Setting up ~/.agents..."
+
+    mkdir -p "${HOME}/.agents"
+
+    # Symlink personal agent prompts
+    ln -fs "${DOTFILES_DIRECTORY}/ai/agents/code-reviewer.md"     "${HOME}/.agents/code-reviewer.md"
+    ln -fs "${DOTFILES_DIRECTORY}/ai/agents/security-auditor.md"  "${HOME}/.agents/security-auditor.md"
+    ln -fs "${DOTFILES_DIRECTORY}/ai/agents/test-engineer.md"     "${HOME}/.agents/test-engineer.md"
+
+    # Symlink the Skills CLI lockfile
+    ln -fs "${DOTFILES_DIRECTORY}/ai/agents/.skill-lock.json"     "${HOME}/.agents/.skill-lock.json"
+
+    # Restore / update skills from the lockfile
+    if type_exists 'npx'; then
+        e_header "Restoring agent skills via Skills CLI..."
+        # `npx skills update` reads .skill-lock.json and installs/updates
+        # all listed skills into ~/.agents/skills/.
+        (cd "${HOME}/.agents" && npx --yes skills update)
+        [[ $? ]] && e_success "Done"
+    else
+        e_warning "npx not found — skipping skill restore."
+        e_warning "Install Node, then run: cd ~/.agents && npx skills update"
+    fi
+}

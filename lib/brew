@@ -20,27 +20,28 @@ run_brew() {
         brew tap bramstein/webfonttools
 
         # disable macos apache before install
-        sudo apachectl stop
+        sudo apachectl stop 2>/dev/null || true
         sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
 
         if ! formula_exists httpd; then
             brew install httpd
         fi
-
-        e_header "Have launchd start homebrew/apache/httpd now and restart at startup"
-        brew services start httpd
-        [[ $? ]] && e_success "Done"
+        # httpd is started/configured in run_postinstall (lib/post-install)
 
         e_header "Checking status of desired Homebrew formulae..."
         local list_formulae
         local -a missing_formulae
+        # Snapshot of `brew leaves` mirrored back into the dotfiles.
+        # TODO markers flag formulae that look unused / candidates for removal
+        # (based on install date == last bin atime, or known-stale tools).
+        # Review periodically: `brew leaves` vs this list.
         local -a desired_formulae=(
             # GNU core utilities (those that come with OS X are outdated)
-            'openldap'
-            'libiconv'
             'coreutils'
             'moreutils'
             'findutils'
+            'gnu-sed'
+            'grep'
 
             # fun
             'cmatrix'
@@ -49,37 +50,34 @@ run_brew() {
             'git'
             'git-lfs'
             'git-extras'
+            'git-secret'
             'diff-so-fancy'
             'gh'
+            'commitizen'
+            'bfg'
 
             # font tools
-            'sfnt2woff'
-            'sfnt2woff-zopfli'
+            'bramstein/webfonttools/sfnt2woff'
+            'bramstein/webfonttools/sfnt2woff-zopfli'
             'woff2'
 
             # system
-            'openssl'
             'openssh'
             'dnsmasq'
-            'gnupg'
-            'libmemcached'
-            'libyaml'
-            'icu4c'
             'mkcert'
             'nss'
-            'binwalk'
             'binutils'
+            'binwalk' # TODO: stale? rarely used
+            'mtr'
 
-            # shell
+            # shell / cli
             'ack'
             'zsh'
             'bash'
             'bash-completion'
             'tree'
-            'wget' # Install wget with IRI support
-            'grep'
+            'wget'
             'screen'
-            'mtr' # mtr - ping & traceroute. best.
             'zoxide'
             'fzf'
             'fd'
@@ -87,28 +85,71 @@ run_brew() {
             'fnm'
             'hexyl'
             'pastel'
-            'gawk'
-
-            # dev
-            'php'
-            'bfg'
-            'python'
-            'node'
-            'go'
-            'hugo'
-            'yarn'
-            'mariadb'
-            'cheat'
-            'grex'
-            'nginx'
-
-            # tools
-            'ssh-copy-id'
-            'testssl'
-            'rsync'
-            'felinks'
-            'rename' # http://plasmasturm.org/code/rename/
+            'dprint'
+            'ripgrep'
+            'neovim'
             'fx'
+            'rename' # http://plasmasturm.org/code/rename/
+            'rsync'
+            'ssh-copy-id'
+            'grex'
+            'cheat' # TODO: stale?
+            'wtfutil' # TODO: stale?
+
+            # dev languages / runtimes
+            'go'
+            'python@3.11'
+            'hugo'
+            'oven-sh/bun/bun'
+            'maven'
+            # 'php'             # dropped — no longer used locally
+            # 'python@3.9'      # TODO: EOL, remove?
+            # 'openjdk@11'      # TODO: superseded by temurin@21 cask, remove?
+
+            # JS package managers
+            'yarn'
+            'pnpm'
+            'ni'
+            # 'egoist/tap/dum'  # TODO: unused since 2021, remove?
+
+            # data / infra
+            'mariadb'         # TODO: still needed?
+            'redis'           # TODO: still needed?
+            'mongodb/brew/mongodb-community'
+            'httpd'
+            'nginx'           # TODO: have httpd, drop one?
+            'sops'
+            'trivy'
+            # 'terraform'      # TODO: stale since 2023, remove?
+            # 'sonarqube'      # TODO: stale, remove?
+
+            # cloud / auth
+            'awscli'
+            'azure-cli'
+            'saml2aws'
+            'docker-credential-helper-ecr'
+
+            # security / web testing
+            'testssl'
+            # 'siege'          # TODO: stale, remove?
+            # 'wrk'            # TODO: stale, remove?
+
+            # ci / automation
+            'act'
+
+            # python tooling
+            'pipenv'          # TODO: still needed?
+            'docutils'
+            'numpy'           # TODO: prefer venv?
+            'pillow'          # TODO: prefer venv?
+
+            # build deps (kept for compatibility)
+            'gobject-introspection'
+            'libass'
+            'libbluray'
+            'libmemcached'
+            'libraw'
+            'tcl-tk'
 
             # media
             'ffmpeg'
@@ -117,23 +158,14 @@ run_brew() {
             'graphicsmagick'
             'optipng'
             'zopfli'
-            'jpeg'
-            'youtube-dl'
-            'awscli'
-            'contentful-cli'
-            'pngpaste'
             'tesseract'
+            # 'youtube-dl'     # TODO: deprecated, switch to yt-dlp?
 
-            # Quick Look plugins
-            'qlcolorcode'
-            'qlstephen'
-            'qlmarkdown'
-            'quicklook-json'
-            'qlimagesize'
-            'suspicious-package'
-            'apparency'
-            'quicklookase'
-            'qlvideo'
+            # cms / cli
+            'contentful-cli'
+
+            # one-offs
+            'vldmrkl/formulae/airdrop-cli' # TODO: unused since 2022?
         )
 
         for index in ${!desired_formulae[*]}; do

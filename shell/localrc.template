@@ -1,0 +1,22 @@
+# Machine-local shell environment.
+#
+# Copied to ~/.localrc on first run; sourced by .zshrc.
+# This file is intentionally NOT tracked by git — put secrets and
+# machine-specific overrides here only.
+
+# Homebrew
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+# --- Secrets (fill in on the local machine, never commit) ---
+# export HOMEBREW_GITHUB_API_TOKEN=""
+# export GH_TOKEN=""
+# export GITHUB_API_KEY=""
+#
+# export ANTHROPIC_API_KEY=""
+# export OPENAI_API_KEY=""
+# export PERPLEXITY_API_KEY=""
+# export GEMINI_API_KEY=""
+# export ZAI_CODING_API_KEY=""
+#
+# export SPECTRAL_DSN=""

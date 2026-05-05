@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSStatusItem Preferred Position Item-0</key>
+	<real>5725</real>
+	<key>NSWindow Frame SUUpdateAlert2</key>
+	<string>598 523 586 402 0 0 1728 1084 </string>
+	<key>SUEnableAutomaticChecks</key>
+	<false/>
+	<key>SUHasLaunchedBefore</key>
+	<true/>
+	<key>SULastCheckTime</key>
+	<date>2026-03-04T06:45:31Z</date>
+	<key>allowAnyShortcut</key>
+	<true/>
+	<key>installVersion</key>
+	<string>99</string>
+	<key>internalTilingNotified</key>
+	<true/>
+	<key>lastVersion</key>
+	<string>100</string>
+	<key>launchOnLogin</key>
+	<true/>
+	<key>notifiedOfProblemApps</key>
+	<true/>
+	<key>reflowTodo</key>
+	<dict>
+		<key>keyCode</key>
+		<integer>45</integer>
+		<key>modifierFlags</key>
+		<integer>786432</integer>
+	</dict>
+	<key>toggleTodo</key>
+	<dict>
+		<key>keyCode</key>
+		<integer>11</integer>
+		<key>modifierFlags</key>
+		<integer>786432</integer>
+	</dict>
+</dict>
+</plist>

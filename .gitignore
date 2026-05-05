@@ -1,2 +1,11 @@
 .idea/
 vim/.viminfo
+
+# Agent skills are restored from ai/agents/.skill-lock.json via `npx skills update`
+ai/agents/skills/
+
+# Never commit machine-local secrets / tokens
+shell/localrc
+.localrc
+.npmrc
+

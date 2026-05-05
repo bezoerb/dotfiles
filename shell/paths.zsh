@@ -8,13 +8,13 @@ dirs_to_prepend=(
     "$FNM_MULTISHELL_PATH/bin"
 )
 
-
 # Directories to be appended to PATH
 declare -a dirs_to_append
 dirs_to_append=(
     "/usr/bin"
     "/usr/local/sbin"
     "$HOME/bin"
+    "$HOME/.local/bin"
  #   "$HOME/Library/Android/sdk/platform-tools"
  #   "$HOME/Library/Android/sdk/tools"
  #   "$HOME/Library/Android/sdk/tools/bin"

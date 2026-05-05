@@ -25,6 +25,7 @@ source ./lib/utils
 source ./lib/brew
 source ./lib/cask
 source ./lib/npm
+source ./lib/agents
 source ./lib/post-install
 
 # Help text
@@ -90,7 +91,7 @@ fi
 if ! type_exists 'gcc'; then
     e_error "The XCode Command Line Tools must be installed first."
     printf "  Download them from: https://developer.apple.com/downloads\n"
-    printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
+    printf "  Then run: bash ~/.dotfiles/scripts/dotfiles\n"
     exit 1
 fi
 
@@ -157,6 +158,8 @@ else
     run_postinstall
     # Install Node packages
     run_npm
+    # Set up ~/.agents and restore skills from the lockfile
+    run_agents
 fi
 
 link() {
@@ -182,8 +185,18 @@ local_gitconfig() {
     fi
 }
 
+local_localrc() {
+    # Bootstrap a machine-local rc file for secrets / per-machine env vars.
+    if ! [ -f ${HOME}/.localrc ]; then
+        cp ${DOTFILES_DIRECTORY}/shell/localrc.template ${HOME}/.localrc
+        chmod 600 ${HOME}/.localrc
+        e_success "Created ~/.localrc (fill in tokens locally; not tracked in git)"
+    fi
+}
+
 mirrorfiles() {
     local_gitconfig
+    local_localrc
 
     # Any global git commands will be written to `.gitconfig`.
     # This prevents them being committed to the repository.
@@ -201,11 +214,41 @@ mirrorfiles() {
     link "shell/ackrc" ".ackrc"
     link "shell/curlrc" ".curlrc"
     link "shell/dircolors" ".dircolors"
+    link "shell/yarnrc" ".yarnrc"
+    link "shell/nuxtrc" ".nuxtrc"
+    link "shell/hintrc" ".hintrc"
     link "git/gitattributes" ".gitattributes"
     link "git/gitignore" ".gitignore"
     link "vim" ".vim"
     link "vim/gvimrc" ".gvimrc"
     link "vim/vimrc" ".vimrc"
+    link "ai/CLAUDE.md" "CLAUDE.md"
+
+    # Mirror personal scripts into ~/bin (preserves files we don't track,
+    # like the hvm binary or the scayle/ folder).
+    mkdir -p "${HOME}/bin"
+    rsync -avz --quiet "${DOTFILES_DIRECTORY}/bin/" "${HOME}/bin/"
+
+    # VS Code user settings (keybindings only — settings.json stays local
+    # because it's frequently machine-specific).
+    vscode_user="${HOME}/Library/Application Support/Code/User"
+    if [ -d "${vscode_user}" ]; then
+        ln -fs "${DOTFILES_DIRECTORY}/vscode/keybindings.json" "${vscode_user}/keybindings.json"
+    fi
+
+    # Claude Code config (selective — runtime state in ~/.claude/* stays local).
+    claude_dir="${HOME}/.claude"
+    if [ -d "${claude_dir}" ]; then
+        mkdir -p "${claude_dir}/commands" "${claude_dir}/memory"
+        ln -fs "${DOTFILES_DIRECTORY}/ai/claude/settings.json"        "${claude_dir}/settings.json"
+        ln -fs "${DOTFILES_DIRECTORY}/ai/claude/statusline-command.sh" "${claude_dir}/statusline-command.sh"
+        for f in "${DOTFILES_DIRECTORY}"/ai/claude/commands/*.md; do
+            [ -e "$f" ] && ln -fs "$f" "${claude_dir}/commands/$(basename "$f")"
+        done
+        for f in "${DOTFILES_DIRECTORY}"/ai/claude/memory/*.md; do
+            [ -e "$f" ] && ln -fs "$f" "${claude_dir}/memory/$(basename "$f")"
+        done
+    fi
 
     e_success "Dotfiles update complete!"
 }
@@ -226,8 +269,9 @@ fi
 seek_confirmation "Warning: This step may modify your macOS system defaults."
 
 if is_confirmed; then
-    bash ./bin/macosdefaults
+    bash ./scripts/macosdefaults
     e_success "macOS settings updated! You may need to restart."
+
 else
     printf "Skipped macOS settings update.\n"
 fi

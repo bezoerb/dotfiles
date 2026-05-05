@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gwrm() {
+  git worktree remove "../wt-$1"
+}

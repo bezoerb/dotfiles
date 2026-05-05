@@ -845,6 +845,30 @@ defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault
 # defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
 
 ###############################################################################
+# Rectangle.app                                                               #
+###############################################################################
+
+# Import preferred window-management shortcuts and settings.
+# Quit the app first so it doesn't overwrite our import on exit.
+if [[ -f "${DOTFILES_DIRECTORY:-${HOME}/.dotfiles}/init/com.knollsoft.Rectangle.plist" ]]; then
+        osascript -e 'tell application "Rectangle" to quit' 2>/dev/null
+        defaults import com.knollsoft.Rectangle \
+                "${DOTFILES_DIRECTORY:-${HOME}/.dotfiles}/init/com.knollsoft.Rectangle.plist"
+fi
+
+###############################################################################
+# Bartender                                                                   #
+###############################################################################
+
+# Import menu bar layout and preferences.
+if [[ -f "${DOTFILES_DIRECTORY:-${HOME}/.dotfiles}/init/com.surteesstudios.Bartender.plist" ]]; then
+        osascript -e 'tell application "Bartender 5" to quit' 2>/dev/null
+        osascript -e 'tell application "Bartender 4" to quit' 2>/dev/null
+        defaults import com.surteesstudios.Bartender \
+                "${DOTFILES_DIRECTORY:-${HOME}/.dotfiles}/init/com.surteesstudios.Bartender.plist"
+fi
+
+###############################################################################
 # Sublime Text                                                                #
 ###############################################################################
 

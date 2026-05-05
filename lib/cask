@@ -10,37 +10,72 @@ run_cask() {
         e_header "Checking status of desired Casks ..."
         local list_casks
         local -a missing_casks
+        # Snapshot of `brew list --cask` mirrored back into the dotfiles.
+        # TODO markers flag casks that look unused (no last-used date in
+        # Spotlight metadata) — review periodically.
         local -a desired_casks=(
             # daily
             'rectangle'
             'alfred'
+            'bartender'
+            'homerow'
             'slack'
+            'sublime-text'
 
             # dev
-            'sublime-text'
             'visual-studio-code'
-            'imagealpha'
-            'imageoptim'
+            'zed'                 # TODO: actually used?
+            'ghostty'             # TODO: actually used?
+            'orbstack'
             'postman'
+            'figma'
             'obsidian'
+            'imagealpha'          # TODO: usage tracker null
+            'imageoptim'          # TODO: usage tracker null
+            'tinypng4mac'
+            'responsively'        # TODO: usage tracker null
+            'memoryanalyzer'      # TODO: usage tracker null
+            'transmit'            # TODO: usage tracker null
 
             # browsers
             'google-chrome'
-            'google-chrome-canary'
+            'google-chrome@canary'
             'firefox'
             'vivaldi'
-            'brave-browser'
+            'brave-browser'       # TODO: usage tracker null
+            'microsoft-edge'      # TODO: usage tracker null
+            # 'chromium'          # TODO: phantom — cask installed but app missing
 
-            #graphics
-            'sketch'
-            'tinypng4mac'
-            'handbrake'
+            # graphics / video
+            'sketch'              # TODO: usage tracker null
+            'handbrake-app'       # TODO: usage tracker null
+            'vlc'                 # TODO: usage tracker null
+            'kap'                 # TODO: usage tracker null
+            'licecap'             # TODO: usage tracker null
+            'clipgrab'            # TODO: usage tracker null
+            'zeplin'              # TODO: usage tracker null
 
-            # less often
+            # tooling / utilities
             'gpg-suite'
-            'licecap'
-            'clipgrab'
-            'kap'
+            'mitmproxy'
+            'ngrok'
+            'betterzip'           # TODO: usage tracker null
+            'blackhole-2ch'
+
+            # JDK
+            'temurin@21'
+
+            # Quick Look plugins
+            'qlcolorcode'
+            'qlstephen'
+            'qlmarkdown'
+            'qlimagesize'
+            'qlvideo'
+            'quicklook-json'
+            'quicklook-video'
+            'quicklookase'
+            'apparency'
+            'suspicious-package'
         )
 
         for index in ${!desired_casks[*]}; do

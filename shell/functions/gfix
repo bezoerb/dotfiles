@@ -1,0 +1,19 @@
+#!/bin/bash
+
+gfix() {
+  base="$1"
+  branch="$2"
+
+  if [ -z "$base" ] || [ -z "$branch" ]; then
+    echo "Usage: gfix <base-branch> <new-branch>"
+    return 1
+  fi
+
+  repo=$(basename "$(git rev-parse --show-toplevel)")
+  safe_branch=$(echo "$branch" | sed 's/[\/:]/-/g')
+  dir="../${repo}-${safe_branch}"
+
+  git fetch origin "$base" &&
+  git worktree add -b "$branch" "$dir" "origin/$base" &&
+  cd "$dir"
+}

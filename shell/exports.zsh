@@ -7,8 +7,8 @@ export LANG="de_DE"
 
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+# export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+# export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
 # Make vim the default editor.
 export EDITOR=/usr/bin/vim
@@ -30,6 +30,8 @@ export NODE_REPL_HISTORY_SIZE='32768'
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE='sloppy'
 
+export NODE_OPTIONS="${NODE_OPTIONS} --max-old-space-size=8192"
+
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8'
 
@@ -41,8 +43,12 @@ export HISTCONTROL='ignoreboth'
 
 eval "$(fnm env)"
 
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+# export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+# export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+
+export CHROME_EXECUTABLE_PATH="/Users/benjamin.zoerb/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary"
+
+# CONTEXT7_API_KEY and GITHUB_PERSONAL_ACCESS_TOKEN are set in ~/.localrc
 
 export JAVA_HOME=`/usr/libexec/java_home -v 17`
 

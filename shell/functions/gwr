@@ -1,0 +1,15 @@
+#!/bin/bash
+
+gwr() {
+  branch="$1"
+  if [ -z "$branch" ]; then
+    echo "Usage: gwr <branch>"
+    return 1
+  fi
+
+  safe_branch=$(echo "$branch" | sed 's/[\/:]/-/g')
+  wt_dir="../wt-$safe_branch"
+
+  git fetch origin >/dev/null 2>&1
+  git worktree add "$wt_dir" "$branch"
+}

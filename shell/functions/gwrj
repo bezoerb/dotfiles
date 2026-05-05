@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gwrj() {
+  gwr "$1" && cd "../wt-$(echo "$1" | sed 's/\//-/g')"
+}

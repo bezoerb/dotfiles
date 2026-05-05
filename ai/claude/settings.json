@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git fetch *)",
+      "Bash(git diff *)",
+      "Bash(pnpm *)",
+      "Bash(npx vitest *)",
+      "Bash(npm *)",
+      "Bash(grep *)",
+      "WebFetch(domain:scayle.dev)",
+      "mcp__chrome-devtools",
+      "mcp__chrome-devtools-local",
+      "mcp__atlassian",
+      "mcp__figma"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "agent-skills@addy-agent-skills": true,
+    "superpowers@claude-plugins-official": true,
+    "andrej-karpathy-skills@karpathy-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "addy-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "addyosmani/agent-skills"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    },
+    "fallow-skills": {
+      "source": {
+        "source": "git",
+        "repo": "fallow-rs/fallow-skills",
+        "url": "https://github.com/fallow-rs/fallow-skills.git"
+      }
+    }
+  },
+  "effortLevel": "xhigh"
+}

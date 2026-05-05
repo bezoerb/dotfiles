@@ -111,6 +111,8 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 # Find the biggest folder
 alias ds='du -ks *|sort -n'
 
+alias gwl='git worktree list'
+
 #
 # OCR on an image in the clipboard.
 # From https://mastodon.social/@aparrish/100804983641371950
