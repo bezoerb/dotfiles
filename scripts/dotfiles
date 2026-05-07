@@ -18,7 +18,7 @@ if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
     rm -rf ${HOME}/dotfiles.tar.gz
 fi
 
-cd ${DOTFILES_DIRECTORY}
+cd "${DOTFILES_DIRECTORY}" || exit 1
 
 source ./lib/help
 source ./lib/utils
@@ -35,22 +35,37 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
 fi
 
 # Test for known flags
-for opt in $@; do
+for opt in "$@"; do
     case $opt in
     --no-packages) no_packages=true ;;
     --no-sync) no_sync=true ;;
-    -* | --*) e_warning "Warning: invalid option $opt" ;;
+    -*) e_warning "Warning: invalid option $opt" ;;
     esac
 done
 
-# Ask for the administrator password upfront
-sudo -v
-# Keep-alive: update existing `sudo` time stamp until `we are` has finished
-while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$" || exit
-done 2>/dev/null &
+# Ask for the administrator password upfront.
+# Allow Ctrl+C to abort the whole script (otherwise sudo just re-prompts
+# and the next sudo call asks again).
+trap 'printf "\nAborted.\n"; exit 130' INT
+
+if ! sudo -v; then
+    e_error "sudo authentication failed — aborting."
+    exit 1
+fi
+
+# Keep-alive: refresh the sudo timestamp every 30s while the script runs.
+# Use `sudo -nv` (validate) instead of `sudo -n true`, because some sudoers
+# configs only allow specific commands but still permit timestamp refresh.
+(
+    while kill -0 "$$" 2>/dev/null; do
+        sudo -nv >/dev/null 2>&1 || exit
+        sleep 30
+    done
+) &
+SUDO_KEEPALIVE_PID=$!
+disown $SUDO_KEEPALIVE_PID 2>/dev/null || true
+trap 'kill $SUDO_KEEPALIVE_PID 2>/dev/null; printf "\nAborted.\n"; exit 130' INT
+trap 'kill $SUDO_KEEPALIVE_PID 2>/dev/null' EXIT
 
 # XCode Command Line Tools
 # thx https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
@@ -101,16 +116,13 @@ if ! type_exists 'brew'; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Fix directories for OSX High sierra
-sudo mkdir -p /usr/local/Cellar
-sudo mkdir -p /usr/local/Caskroom
-sudo mkdir -p /usr/local/Frameworks
-sudo mkdir -p /usr/local/include
-sudo mkdir -p /usr/local/lib
-sudo mkdir -p /usr/local/sbin
-sudo mkdir -p /usr/local/bin
-sudo mkdir -p /usr/local/var
-sudo mkdir -p /usr/local/etc
+# Fix directories for legacy Intel Homebrew prefix.
+# Apple Silicon installs into /opt/homebrew and does not need this.
+if [[ "$(uname -m)" != "arm64" ]]; then
+    for d in Cellar Caskroom Frameworks include lib sbin bin var etc; do
+        sudo mkdir -p "/usr/local/${d}"
+    done
+fi
 
 
 # Check for git
@@ -139,8 +151,15 @@ if [[ $no_sync ]]; then
     printf "Skipped dotfiles sync.\n"
 else
     e_header "Syncing dotfiles..."
-    # Pull down the latest changes
+    # Stash uncommitted changes so `git pull --rebase` doesn't abort.
+    _stashed=0
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+        git stash push -u -m "dotfiles-auto-stash $(date +%s)" >/dev/null && _stashed=1
+    fi
     git pull --rebase origin main
+    if [[ $_stashed -eq 1 ]]; then
+        git stash pop >/dev/null || e_warning "Could not auto-restore stashed changes; check 'git stash list'."
+    fi
     # Update submodules
     git submodule update --recursive --init --quiet
 fi
@@ -247,6 +266,19 @@ mirrorfiles() {
         done
         for f in "${DOTFILES_DIRECTORY}"/ai/claude/memory/*.md; do
             [ -e "$f" ] && ln -fs "$f" "${claude_dir}/memory/$(basename "$f")"
+        done
+    fi
+
+    # Custom agent skills — single source of truth in ai/skills/, symlinked
+    # into both Copilot (~/.agents/skills/) and Claude Code (~/.claude/skills/).
+    skills_src="${DOTFILES_DIRECTORY}/ai/skills"
+    if [ -d "${skills_src}" ]; then
+        for target in "${HOME}/.agents/skills" "${HOME}/.claude/skills"; do
+            mkdir -p "${target}"
+            for skill in "${skills_src}"/*/; do
+                [ -d "${skill}" ] || continue
+                ln -fsn "${skill%/}" "${target}/$(basename "${skill}")"
+            done
         done
     fi
 

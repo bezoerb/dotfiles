@@ -24,17 +24,15 @@ run_cask() {
 
             # dev
             'visual-studio-code'
-            'zed'                 # TODO: actually used?
-            'ghostty'             # TODO: actually used?
+            #'zed'                 # TODO: actually used?
+            #'ghostty'             # TODO: actually used?
             'orbstack'
             'postman'
             'figma'
             'obsidian'
-            'imagealpha'          # TODO: usage tracker null
             'imageoptim'          # TODO: usage tracker null
-            'tinypng4mac'
-            'responsively'        # TODO: usage tracker null
-            'memoryanalyzer'      # TODO: usage tracker null
+            #'responsively'        # TODO: usage tracker null
+            #'memoryanalyzer'      # TODO: usage tracker null
             'transmit'            # TODO: usage tracker null
 
             # browsers
@@ -47,13 +45,13 @@ run_cask() {
             # 'chromium'          # TODO: phantom — cask installed but app missing
 
             # graphics / video
-            'sketch'              # TODO: usage tracker null
+            #'sketch'              # TODO: usage tracker null
             'handbrake-app'       # TODO: usage tracker null
-            'vlc'                 # TODO: usage tracker null
-            'kap'                 # TODO: usage tracker null
+            #'vlc'                 # TODO: usage tracker null
+            #'kap'                 # TODO: usage tracker null
             'licecap'             # TODO: usage tracker null
             'clipgrab'            # TODO: usage tracker null
-            'zeplin'              # TODO: usage tracker null
+            #'zeplin'              # TODO: usage tracker null
 
             # tooling / utilities
             'gpg-suite'
@@ -66,35 +64,30 @@ run_cask() {
             'temurin@21'
 
             # Quick Look plugins
-            'qlcolorcode'
-            'qlstephen'
             'qlmarkdown'
-            'qlimagesize'
-            'qlvideo'
-            'quicklook-json'
-            'quicklook-video'
-            'quicklookase'
-            'apparency'
             'suspicious-package'
         )
 
         for index in ${!desired_casks[*]}; do
             if ! cask_exists ${desired_casks[$index]}; then
-                # Store the name (and options) of every missing formula
-                missing_casks=("${missing_casks[@]}" "${desired_casks[$index]}")
+                missing_casks+=("${desired_casks[$index]}")
             fi
         done
 
-        if [[ "$missing_casks" ]]; then
-            # Convert the array of missing formula into a list of space-separate strings
-            list_casks=$(printf "%s " "${missing_casks[@]}")
-
-            e_header "Installing missing Homebrew cask..."
-
-            # Install all missing formulae
-            brew install --cask $list_casks
-
-            [[ $? ]] && e_success "Done"
+        if [[ ${#missing_casks[@]} -gt 0 ]]; then
+            e_header "Installing ${#missing_casks[@]} missing Homebrew cask(s)..."
+            local -a failed_casks=()
+            for cask in "${missing_casks[@]}"; do
+                if ! brew install --cask "$cask"; then
+                    e_warning "Failed to install cask: $cask"
+                    failed_casks+=("$cask")
+                fi
+            done
+            if [[ ${#failed_casks[@]} -gt 0 ]]; then
+                e_warning "Skipped (review lib/cask): ${failed_casks[*]}"
+            else
+                e_success "Done"
+            fi
         fi
     else
         printf "\n"

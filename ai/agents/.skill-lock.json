@@ -204,18 +204,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/executing-plans/SKILL.md",
-      "skillFolderHash": "20087d25fb28f5f54578d873dc198ab24b34f967",
+      "skillFolderHash": "b41c919caf1bb07fbacb0e29899ac513f9eb11cd4dd695975ad352c2c03cc4d7",
       "installedAt": "2026-02-27T06:24:12.499Z",
-      "updatedAt": "2026-04-23T08:37:04.234Z"
+      "updatedAt": "2026-05-06T13:03:20.093Z"
     },
     "finishing-a-development-branch": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/finishing-a-development-branch/SKILL.md",
-      "skillFolderHash": "7656b8ebe0c9659ea548ba2981b078b333d1846e",
+      "skillFolderHash": "932d23af11a3eb2b758f5b1d9aec7b6d28ddd26658328414f87f34dff7179d19",
       "installedAt": "2026-02-27T06:24:12.525Z",
-      "updatedAt": "2026-04-23T08:37:04.503Z"
+      "updatedAt": "2026-05-06T13:03:21.655Z"
     },
     "receiving-code-review": {
       "source": "obra/superpowers",
@@ -231,27 +231,27 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/requesting-code-review/SKILL.md",
-      "skillFolderHash": "ed265b1a03114cc400d5524afc5c961a4aa9ea8b",
+      "skillFolderHash": "874f3786b05007a8b4a60452a4cd89b9917c645d34b6b1e40ea05037d12f0e67",
       "installedAt": "2026-02-27T06:24:12.608Z",
-      "updatedAt": "2026-04-23T08:37:05.271Z"
+      "updatedAt": "2026-05-06T13:03:22.630Z"
     },
     "subagent-driven-development": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/subagent-driven-development/SKILL.md",
-      "skillFolderHash": "fbcd94ffcf589754a8ecfa59861cc8843313590e",
+      "skillFolderHash": "b38be2f3a092d758127f6d47e77c2493885aebf38aae359e4c786df2c343b837",
       "installedAt": "2026-02-27T06:24:12.636Z",
-      "updatedAt": "2026-04-23T08:37:05.563Z"
+      "updatedAt": "2026-05-06T13:03:24.175Z"
     },
     "systematic-debugging": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/systematic-debugging/SKILL.md",
-      "skillFolderHash": "828c239ac986cc1fc7edd10292f66e4a3640e9c0",
+      "skillFolderHash": "7246fdd3a795fc3daff0af72044ca99bf836e4e6a46844742858786fdfb86488",
       "installedAt": "2026-02-27T06:24:12.668Z",
-      "updatedAt": "2026-04-23T08:37:05.828Z"
+      "updatedAt": "2026-05-06T13:03:25.678Z"
     },
     "test-driven-development": {
       "source": "obra/superpowers",
@@ -267,18 +267,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/using-git-worktrees/SKILL.md",
-      "skillFolderHash": "a5b3f5965f321175a7f07dcadff0bb79adb9e9f7",
+      "skillFolderHash": "bd10bc57c23040630b17c877a9bc7b4be40c35161a2e2f110d770d78e3b0a4ff",
       "installedAt": "2026-02-27T06:24:12.780Z",
-      "updatedAt": "2026-04-23T08:37:06.363Z"
+      "updatedAt": "2026-05-06T13:03:26.933Z"
     },
     "using-superpowers": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/using-superpowers/SKILL.md",
-      "skillFolderHash": "64c70a2b656d440ddb50818c2477e028facbc468",
+      "skillFolderHash": "de10fd3ff46d797acc92b9df6b3ea456a5cd1d095b73c90bc921e83cce4c5bb9",
       "installedAt": "2026-02-27T06:24:12.837Z",
-      "updatedAt": "2026-04-23T08:37:06.618Z"
+      "updatedAt": "2026-05-06T13:03:28.581Z"
     },
     "verification-before-completion": {
       "source": "obra/superpowers",
@@ -294,9 +294,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/writing-plans/SKILL.md",
-      "skillFolderHash": "704e240d4b281baf8a339e1418baa249860197f7",
+      "skillFolderHash": "2b986445454a025ca2c3839f8a2024747e8cce0517948437232cd113d2719060",
       "installedAt": "2026-02-27T06:24:12.913Z",
-      "updatedAt": "2026-04-23T08:37:07.134Z"
+      "updatedAt": "2026-05-06T13:03:29.897Z"
     },
     "writing-skills": {
       "source": "obra/superpowers",
@@ -348,45 +348,45 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/nucliweb/webperf-snippets.git",
       "skillPath": "skills/webperf-core-web-vitals/SKILL.md",
-      "skillFolderHash": "8f519656b058c90dc78abf2644120cd7466d5c35",
+      "skillFolderHash": "ed89893381b2f1c5859301c4f94c8826e294347192b589d772f217a0d967ad19",
       "installedAt": "2026-03-04T21:49:38.587Z",
-      "updatedAt": "2026-05-04T10:04:33.849Z"
+      "updatedAt": "2026-05-06T13:03:31.622Z"
     },
     "webperf-interaction": {
       "source": "nucliweb/webperf-snippets",
       "sourceType": "github",
       "sourceUrl": "https://github.com/nucliweb/webperf-snippets.git",
       "skillPath": "skills/webperf-interaction/SKILL.md",
-      "skillFolderHash": "e928b2fffd0cf97d2abbba6e0cf633ec08867314",
+      "skillFolderHash": "ca7be7670aa844e603b98c63a5347214425e2fe1e630355a8e67d6bdf59f5ad0",
       "installedAt": "2026-03-04T21:49:38.627Z",
-      "updatedAt": "2026-05-04T10:04:36.069Z"
+      "updatedAt": "2026-05-06T13:03:33.758Z"
     },
     "webperf-loading": {
       "source": "nucliweb/webperf-snippets",
       "sourceType": "github",
       "sourceUrl": "https://github.com/nucliweb/webperf-snippets.git",
       "skillPath": "skills/webperf-loading/SKILL.md",
-      "skillFolderHash": "da51a81162c1946f3e06ed1e952650824748afe4",
+      "skillFolderHash": "ab0dc77c23754fabffabae9d3e84ab3ecb539784690e719ecf536d76fa0d93f1",
       "installedAt": "2026-03-04T21:49:38.659Z",
-      "updatedAt": "2026-05-04T10:04:38.726Z"
+      "updatedAt": "2026-05-06T13:03:35.362Z"
     },
     "webperf-media": {
       "source": "nucliweb/webperf-snippets",
       "sourceType": "github",
       "sourceUrl": "https://github.com/nucliweb/webperf-snippets.git",
       "skillPath": "skills/webperf-media/SKILL.md",
-      "skillFolderHash": "ddc35d4ad96658fdb2d11f739902ec18c17bacd7",
+      "skillFolderHash": "9503c4dbcb2a27713110e87876e77817ae8d8e1b0a78e1319f7f7feadc84d2a0",
       "installedAt": "2026-03-04T21:49:38.689Z",
-      "updatedAt": "2026-05-04T10:04:41.026Z"
+      "updatedAt": "2026-05-06T13:03:36.983Z"
     },
     "webperf-resources": {
       "source": "nucliweb/webperf-snippets",
       "sourceType": "github",
       "sourceUrl": "https://github.com/nucliweb/webperf-snippets.git",
       "skillPath": "skills/webperf-resources/SKILL.md",
-      "skillFolderHash": "c36cd88cbfa1c1ff2121d7165726865a900038c0",
+      "skillFolderHash": "42827ca103299d12ebc32a1833a280dc118dd9ebaa78b6b48f77243bd1bee0e0",
       "installedAt": "2026-03-04T21:49:38.722Z",
-      "updatedAt": "2026-05-04T10:04:45.405Z"
+      "updatedAt": "2026-05-06T13:03:38.495Z"
     },
     "api-and-interface-design": {
       "source": "addyosmani/agent-skills",

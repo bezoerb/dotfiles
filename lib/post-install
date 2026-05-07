@@ -2,6 +2,10 @@
 
 run_postinstall() {
 
+    # Make sure the sudo token is fresh before we start a long block of
+    # mixed user/sudo commands. Prompts here would interrupt the flow.
+    sudo -v
+
     BREW_PREFIX="$(brew --prefix)"
 
     # Remove the quarantine attribute for quicklook plugins (best-effort)
@@ -15,9 +19,10 @@ run_postinstall() {
         [[ $? ]] && e_success "Done"
     fi
 
-    # use sindres pure theme
+    # use sindres pure theme (oh-my-zsh looks in custom/themes/ for ZSH_THEME)
+    mkdir -p "${HOME}/.oh-my-zsh/custom/themes"
     rsync -avz --quiet "${DOTFILES_DIRECTORY}/shell/pure.zsh-theme" \
-        "${HOME}/.oh-my-zsh/custom/pure.zsh-theme"
+        "${HOME}/.oh-my-zsh/custom/themes/pure.zsh-theme"
 
     # zsh-z plugin (idempotent)
     ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"
@@ -26,8 +31,15 @@ run_postinstall() {
     fi
 
     # set zsh as default shell
-    if [[ "${SHELL}" != "$(which zsh)" ]]; then
-        chsh -s "$(which zsh)"
+    ZSH_BIN="$(which zsh)"
+    if [[ "${SHELL}" != "${ZSH_BIN}" ]]; then
+        # chsh refuses shells not listed in /etc/shells ("non-standard shell")
+        if ! grep -qxF "${ZSH_BIN}" /etc/shells; then
+            echo "${ZSH_BIN}" | sudo tee -a /etc/shells >/dev/null
+        fi
+        # Use `sudo chsh` so the cached sudo token is reused instead of
+        # prompting for the user password again.
+        sudo chsh -s "${ZSH_BIN}" "${USER}"
     fi
 
     # ----- mkcert local CA -----
@@ -36,10 +48,14 @@ run_postinstall() {
     # ----- httpd (static webserver for ~/Sites) -----
     e_header "Configure apache/httpd"
 
+    # If a previous run left a broken launch agent registered, remove it so
+    # `brew services start` can bootstrap cleanly ("Input/output error" = 5).
+    launchctl bootout "gui/$(id -u)/homebrew.mxcl.httpd" 2>/dev/null || true
+    rm -f "${HOME}/Library/LaunchAgents/homebrew.mxcl.httpd.plist" 2>/dev/null || true
+
     # start now and on login (user-scope; do NOT use sudo)
     brew services start httpd
     [[ $? ]] && e_success "httpd service started"
-
     apacheConf=$(httpd -V 2>/dev/null | awk -F'"' '/SERVER_CONFIG_FILE/{print $2}')
     if [[ -z "${apacheConf}" ]]; then
         apacheConf="${BREW_PREFIX}/etc/httpd/httpd.conf"
@@ -60,14 +76,33 @@ run_postinstall() {
     sudo sed -i '' -E "s/^Listen 80[0-9]+/Listen 80/g"             "${apacheConf}"
     sudo sed -i '' -e "s/User daemon/User _www/g"                  "${apacheConf}"
     sudo sed -i '' -e "s/Group daemon/Group _www/g"                "${apacheConf}"
-    sudo sed -i '' -E "s/#?ServerName .*/ServerName localhost/"    "${apacheConf}"
+    sudo sed -i '' -E "s/^#?ServerName .*/ServerName localhost/"    "${apacheConf}"
+
+    # Generate a self-signed cert for SSL vhost if missing, otherwise httpd
+    # refuses to start ("SSLCertificateFile ... does not exist").
+    httpdEtc="$(dirname "${apacheConf}")"
+    if [[ ! -s "${httpdEtc}/server.crt" || ! -s "${httpdEtc}/server.key" ]]; then
+        sudo openssl req -x509 -nodes -newkey rsa:2048 -days 3650 \
+            -keyout "${httpdEtc}/server.key" \
+            -out    "${httpdEtc}/server.crt" \
+            -subj "/CN=localhost" >/dev/null 2>&1 || true
+    fi
 
     sudo apachectl -k restart
     [[ $? ]] && e_success "httpd configured"
 
     # ----- git-friendly -----
     e_header "Adding git-friendly..."
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/git-friendly/git-friendly/main/install.sh)"
+    # The upstream installer hard-codes /usr/local/bin which (a) requires sudo
+    # and (b) doesn't exist on Apple Silicon. Install into Homebrew's bin
+    # directory instead, which is already on PATH.
+    GF_PREFIX="$(brew --prefix)/bin"
+    mkdir -p "${GF_PREFIX}"
+    for tool in branch merge pull push; do
+        curl -fsSL "https://raw.githubusercontent.com/git-friendly/git-friendly/main/${tool}" \
+            -o "${GF_PREFIX}/${tool}" \
+            && chmod +x "${GF_PREFIX}/${tool}"
+    done
     [[ $? ]] && e_success "Done"
 
     # ----- mtr setuid (run without sudo) -----

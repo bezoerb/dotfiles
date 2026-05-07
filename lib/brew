@@ -168,15 +168,20 @@ run_brew() {
             'vldmrkl/formulae/airdrop-cli' # TODO: unused since 2022?
         )
 
+        local -a failed_formulae=()
         for index in ${!desired_formulae[*]}; do
             if ! formula_exists ${desired_formulae[$index]}; then
-                # Store the name (and options) of every missing formula
-                missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
-
-                e_header "Installing missing Homebrew formulae ${desired_formulae[$index]}"
-                brew install ${desired_formulae[$index]}
+                missing_formulae+=("${desired_formulae[$index]}")
+                e_header "Installing missing Homebrew formula: ${desired_formulae[$index]}"
+                if ! brew install "${desired_formulae[$index]}"; then
+                    e_warning "Failed to install: ${desired_formulae[$index]}"
+                    failed_formulae+=("${desired_formulae[$index]}")
+                fi
             fi
         done
+        if [[ ${#failed_formulae[@]} -gt 0 ]]; then
+            e_warning "Skipped (review lib/brew): ${failed_formulae[*]}"
+        fi
 
         # Remove outdated versions from the Cellar
         brew cleanup
