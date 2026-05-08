@@ -159,4 +159,16 @@ run_postinstall() {
 
     # diff-so-fancy as default git pager
     git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+
+    # ----- Touch ID for sudo -----
+    # Add `pam_tid.so` to /etc/pam.d/sudo (idempotent). Inserted right
+    # after the first line so it takes precedence over the other auth
+    # methods. Uses BSD sed (macOS default).
+    sudoPam="/etc/pam.d/sudo"
+    if [[ -f "${sudoPam}" ]] && ! grep -q "pam_tid.so" "${sudoPam}"; then
+        sudo sed -i '' '1a\
+auth       sufficient     pam_tid.so
+' "${sudoPam}"
+        e_success "Touch ID enabled for sudo"
+    fi
 }

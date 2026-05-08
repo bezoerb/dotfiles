@@ -39,6 +39,11 @@ for opt in "$@"; do
     case $opt in
     --no-packages) no_packages=true ;;
     --no-sync) no_sync=true ;;
+    --no-brew) no_brew=true ;;
+    --no-cask) no_cask=true ;;
+    --no-postinstall) no_postinstall=true ;;
+    --no-npm) no_npm=true ;;
+    --no-agents) no_agents=true ;;
     -*) e_warning "Warning: invalid option $opt" ;;
     esac
 done
@@ -170,15 +175,35 @@ if [[ $no_packages ]]; then
 else
     printf "Updating packages...\n"
     # Install Homebrew formulae
-    run_brew
+    if [[ $no_brew ]]; then
+        printf "Skipped Homebrew formulae.\n"
+    else
+        run_brew
+    fi
     # Install Homebrew casks
-    run_cask
+    if [[ $no_cask ]]; then
+        printf "Skipped Homebrew casks.\n"
+    else
+        run_cask
+    fi
     # install things besides homebrew & configure tools like dnsmasq
-    run_postinstall
+    if [[ $no_postinstall ]]; then
+        printf "Skipped post-install configuration.\n"
+    else
+        run_postinstall
+    fi
     # Install Node packages
-    run_npm
+    if [[ $no_npm ]]; then
+        printf "Skipped Node package install.\n"
+    else
+        run_npm
+    fi
     # Set up ~/.agents and restore skills from the lockfile
-    run_agents
+    if [[ $no_agents ]]; then
+        printf "Skipped ~/.agents setup.\n"
+    else
+        run_agents
+    fi
 fi
 
 link() {

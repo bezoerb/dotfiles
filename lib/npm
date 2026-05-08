@@ -2,20 +2,49 @@
 
 run_npm() {
 
-    # Check for npm
-    if type_exists 'npm'; then
+    # Check for pnpm
+    if type_exists 'pnpm'; then
         e_header "Installing Node.js packages..."
 
-        # List of npm packages
-        local packages="eslint prettier np browser-sync npm-check contentful-clean-space serve memlab"
+        # Ensure pnpm's global bin dir exists and is on PATH for this shell.
+        # Mirrors the block our zshrc adds; needed because this installer
+        # runs in a non-interactive bash shell that doesn't source zshrc.
+        # NOTE: pnpm's `global-bin-dir` is `${PNPM_HOME}/bin`, not
+        # `${PNPM_HOME}` itself — query pnpm to get the actual path.
+        export PNPM_HOME="${PNPM_HOME:-${HOME}/Library/pnpm}"
+        mkdir -p "${PNPM_HOME}"
 
-        # Install packages globally and quietly
-        npm install $packages --global --quiet
+        pnpm_bin="$(pnpm config get global-bin-dir 2>/dev/null)"
+        [[ -z "${pnpm_bin}" || "${pnpm_bin}" == "undefined" ]] && pnpm_bin="${PNPM_HOME}/bin"
+        mkdir -p "${pnpm_bin}"
+        case ":${PATH}:" in
+            *":${pnpm_bin}:"*) ;;
+            *) export PATH="${pnpm_bin}:${PATH}" ;;
+        esac
+
+        # pnpm is managed by Homebrew — disable its self-install/update
+        # behaviour that otherwise tries to drop a `@pnpm/exe` copy into
+        # PNPM_HOME (and fails with ENOENT bin warnings).
+        pnpm config set manage-package-manager-versions false >/dev/null 2>&1 || true
+
+        # List of npm packages
+        local packages="fallow np browser-sync npm-check contentful-clean-space serve memlab"
+
+        # Install packages globally and quietly. `--allow-build=<pkg>` (pnpm
+        # v10+) pre-approves postinstall build scripts and skips the
+        # interactive picker. Listed deps are pulled in by puppeteer/memlab.
+        pnpm add --global --silent \
+            --allow-build=@memlab/cli \
+            --allow-build=fallow \
+            --allow-build=memlab \
+            --allow-build=puppeteer \
+            --allow-build=sleep \
+            $packages
 
         [[ $? ]] && e_success "Done"
     else
         printf "\n"
-        e_error "Error: npm not found."
+        e_error "Error: pnpm not found."
         printf "Aborting...\n"
         exit
     fi

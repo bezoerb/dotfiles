@@ -22,14 +22,16 @@ run_agents() {
     ln -fs "${DOTFILES_DIRECTORY}/ai/agents/.skill-lock.json"     "${HOME}/.agents/.skill-lock.json"
 
     # Restore / update skills from the lockfile
-    if type_exists 'npx'; then
+    if type_exists 'pnpm'; then
         e_header "Restoring agent skills via Skills CLI..."
-        # `npx skills update` reads .skill-lock.json and installs/updates
-        # all listed skills into ~/.agents/skills/.
-        (cd "${HOME}/.agents" && npx --yes skills update)
+
+        # `pnpm dlx skills update --global` reads .skill-lock.json and
+        # installs/updates all listed skills into ~/.agents/skills/.
+        # `pnpm dlx` runs without an install prompt (npx-equivalent).
+        (cd "${HOME}/.agents" && pnpm dlx skills update --global)
         [[ $? ]] && e_success "Done"
     else
-        e_warning "npx not found — skipping skill restore."
-        e_warning "Install Node, then run: cd ~/.agents && npx skills update"
+        e_warning "pnpm not found — skipping skill restore."
+        e_warning "Install pnpm, then run: cd ~/.agents && pnpm dlx skills update --global"
     fi
 }

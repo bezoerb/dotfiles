@@ -7,8 +7,13 @@ OS X dotfiles
 Usage: $(basename "$0") [options]
 Options:
     -h, --help      Print this help text
-    --no-packages   Suppress package updates
-    --no-sync       Suppress pulling from the remote repository
+    --no-packages       Suppress package updates
+    --no-sync           Suppress pulling from the remote repository
+    --no-brew           Skip Homebrew formulae install (run_brew)
+    --no-cask           Skip Homebrew casks install (run_cask)
+    --no-postinstall    Skip post-install configuration (run_postinstall)
+    --no-npm            Skip global Node package install (run_npm)
+    --no-agents         Skip ~/.agents setup and skill restore (run_agents)
 
 Documentation can be found at https://github.com/necolas/dotfiles/
 Copyright (c) Nicolas Gallagher

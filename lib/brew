@@ -13,8 +13,7 @@ run_brew() {
         brew upgrade
         [[ $? ]] && e_success "Done"
 
-        # Install GNU `sed`, overwriting the built-in `sed`.
-        brew install gnu-sed
+        # GNU `sed` is installed via the desired_formulae loop below.
 
         # font tools.
         brew tap bramstein/webfonttools
@@ -101,7 +100,8 @@ run_brew() {
             'python@3.11'
             'hugo'
             'oven-sh/bun/bun'
-            'maven'
+            #'maven'
+            'node'
             # 'php'             # dropped — no longer used locally
             # 'python@3.9'      # TODO: EOL, remove?
             # 'openjdk@11'      # TODO: superseded by temurin@21 cask, remove?
@@ -110,6 +110,7 @@ run_brew() {
             'yarn'
             'pnpm'
             'ni'
+            'vite-plus'
             # 'egoist/tap/dum'  # TODO: unused since 2021, remove?
 
             # data / infra
