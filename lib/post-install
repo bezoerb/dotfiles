@@ -171,4 +171,37 @@ auth       sufficient     pam_tid.so
 ' "${sudoPam}"
         e_success "Touch ID enabled for sudo"
     fi
+
+    # ----- Login items ("Bei der Anmeldung öffnen") -----
+    # Re-create the list from init/login-items.txt. Apps not installed
+    # on this Mac are skipped with a warning. Refresh the source list
+    # with: bin/login-items-export
+    loginItems="${DOTFILES_DIRECTORY}/init/login-items.txt"
+    if [[ -f "${loginItems}" ]]; then
+        e_header "Restoring login items..."
+        while IFS= read -r line; do
+            # strip comments / blanks
+            line="${line%%#*}"
+            line="${line## }"; line="${line%% }"
+            [[ -z "${line}" ]] && continue
+            # expand leading ~
+            [[ "${line}" == "~"* ]] && line="${HOME}${line:1}"
+
+            if [[ ! -e "${line}" ]]; then
+                e_warning "Skipping (not installed): ${line}"
+                continue
+            fi
+
+            name="$(basename "${line}" .app)"
+            # Add only if not already present (idempotent).
+            osascript >/dev/null <<APPLESCRIPT
+tell application "System Events"
+    if not (exists login item "${name}") then
+        make login item at end with properties {path:"${line}", hidden:false}
+    end if
+end tell
+APPLESCRIPT
+        done <"${loginItems}"
+        e_success "Login items configured"
+    fi
 }

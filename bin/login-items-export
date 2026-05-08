@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Export the current "Open at Login" items into init/login-items.txt
+#
+# Re-run this whenever you add/remove a login item in
+# System Settings → General → Login Items.
+
+set -euo pipefail
+
+DOTFILES_DIRECTORY="${DOTFILES_DIRECTORY:-${HOME}/.dotfiles}"
+target="${DOTFILES_DIRECTORY}/init/login-items.txt"
+
+# Ask System Events for paths; convert ", " separator to newlines.
+mapfile -t paths < <(
+    osascript -e 'tell application "System Events" to get the path of every login item' \
+        | tr ',' '\n' \
+        | sed -E 's/^[[:space:]]+//;s/[[:space:]]+$//' \
+        | awk 'NF'
+)
+
+if (( ${#paths[@]} == 0 )); then
+    echo "No login items found." >&2
+    exit 1
+fi
+
+# Re-tilde the home dir for portability across users/machines.
+{
+    cat <<'HEADER'
+# Login items ("Bei der Anmeldung öffnen") restored by lib/post-install.
+# - One app path per line. Empty lines and lines starting with `#` are ignored.
+# - Paths support ~ expansion.
+# - Apps that don't exist on the new Mac are skipped with a warning.
+# - Refresh this list with: bin/login-items-export
+HEADER
+    printf '%s\n' "${paths[@]}" \
+        | sed "s|^${HOME}|~|" \
+        | sort -f
+} >"${target}"
+
+echo "Wrote ${#paths[@]} login items to ${target}"

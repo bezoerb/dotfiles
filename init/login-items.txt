@@ -1,0 +1,15 @@
+# Login items ("Bei der Anmeldung öffnen") restored by lib/post-install.
+# - One app path per line. Empty lines and lines starting with `#` are ignored.
+# - Paths support ~ expansion.
+# - Apps that don't exist on the new Mac are skipped with a warning.
+# - Refresh this list with: bin/login-items-export
+/Applications/Alfred 5.app
+/Applications/Bartender 6.app
+/Applications/CleanShot X.app
+/Applications/Dato.app
+~/Library/Application Support/Figma/FigmaAgent.app
+/Applications/Ivanti Tunnel.app
+/Applications/OrbStack.app
+/Applications/Rectangle.app
+/Applications/Tyme2.app
+/Applications/Webex.app
