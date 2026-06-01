@@ -264,3 +264,4 @@ Skills live in `~/.agents/skills/<name>/SKILL.md`. Invoke with the Skill tool us
 | `edit-article` | Edit/revise/improve article drafts |
 | `context-engineering` | Optimize agent context, configure rules files |
 | `incremental-implementation` | Large tasks — deliver changes in safe incremental steps |
+| `scayle-docs` | Look up SCAYLE platform docs (storefront framework, APIs, panel, webhooks) on demand from cached llms.txt |

@@ -6,13 +6,42 @@
       "Bash(git diff *)",
       "Bash(pnpm *)",
       "Bash(npx vitest *)",
+      "Bash(pnpx vitest *)",
+      "Bash(pnpm exec *)",
       "Bash(npm *)",
+      "Bash(pnpx fallow *)",
+      "Bash(npx fallow *)",
       "Bash(grep *)",
       "WebFetch(domain:scayle.dev)",
       "mcp__chrome-devtools",
       "mcp__chrome-devtools-local",
       "mcp__atlassian",
-      "mcp__figma"
+      "mcp__figma",
+      "mcp__claude_ai_Atlassian",
+      "mcp__claude_ai_Datadog",
+      "Bash(find /Users/benjamin.zoerb/Sites/scayle/levis/leviDTCPPE-web-frontend-main/src -type f \\\\\\( -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.vue\" \\\\\\) | head -20)",
+      "Read(//Users/benjamin.zoerb/Sites/scayle/levis/leviDTCPPE-web-frontend-main/src/**)",
+      "Bash(find /Users/benjamin.zoerb/Sites/scayle/levis/leviDTCPPE-graphql-bff-main -type f \\\\\\( -name \"*.ts\" -o -name \"*.js\" -o -name \"*.graphql\" \\\\\\) | head -20)",
+      "Read(//Users/benjamin.zoerb/Sites/scayle/levis/leviDTCPPE-graphql-bff-main/**)",
+      "Read(//Users/benjamin.zoerb/.claude/skills/pr-review/references/**)",
+      "Read(//Users/benjamin.zoerb/.agents/skills/pr-review/references/**)",
+      "Bash(pnpm typecheck *)",
+      "Read(//Users/benjamin.zoerb/.agents/skills/mr-description/**)",
+      "Read(//Users/benjamin.zoerb/.agents/skills/jira-description/**)",
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "Read(//Users/benjamin.zoerb/Library/Mobile Documents/iCloud~md~obsidian/Documents/jvm/Scayle/**)",
+      "Bash(ls /Users/benjamin.zoerb/Sites/scayle/levis/leviDTCPPE-graphql-bff-main/ 2>/dev/null | head -30 && echo \"---\" && ls /Users/benjamin.zoerb/Sites/scayle/levis/leviDTCPPE-web-frontend-main/ 2>/dev/null | head -30)",
+      "Read(//Users/benjamin.zoerb/Sites/scayle/levis/leviDTCPPE-web-frontend-main/**)",
+      "Bash(bash ~/.agents/skills/scayle-docs/scripts/search.sh *)",
+      "Bash(bash ~/.agents/skills/scayle-docs/scripts/fetch.sh *)",
+      "Bash(bash ~/.agents/skills/scayle-docs/scripts/refresh.sh *)",
+      "mcp__glab__glab_mr_view",
+      "mcp__glab__glab_api",
+      "Bash(glab mr *)",
+      "Bash(glab api *)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
     ]
   },
   "statusLine": {
@@ -22,7 +51,9 @@
   "enabledPlugins": {
     "agent-skills@addy-agent-skills": true,
     "superpowers@claude-plugins-official": true,
-    "andrej-karpathy-skills@karpathy-skills": true
+    "andrej-karpathy-skills@karpathy-skills": true,
+    "frontend-design@claude-plugins-official": true,
+    "gitlab@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "addy-agent-skills": {
@@ -46,10 +77,10 @@
     "fallow-skills": {
       "source": {
         "source": "git",
-        "repo": "fallow-rs/fallow-skills",
         "url": "https://github.com/fallow-rs/fallow-skills.git"
       }
     }
   },
-  "effortLevel": "xhigh"
+  "effortLevel": "xhigh",
+  "theme": "auto"
 }

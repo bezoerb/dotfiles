@@ -15,6 +15,7 @@ export EDITOR=/usr/bin/vim
 
 export ANDROID_HOME=~/Library/Android/sdk
 
+export PNPM_HOME="~/Library/pnpm"
 export JAVA_HOME=$(/usr/libexec/java_home -v1.8)
 
 export PYTHON=`which python3`
