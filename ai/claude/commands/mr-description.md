@@ -1,7 +1,8 @@
 ---
+name: mr-description
 description: Generate a merge/pull request description in plain Markdown, ready to paste into GitLab/GitHub/Bitbucket.
 agent: agent
-[vscode, execute, read, agent, edit, search, web, 'com.atlassian/atlassian-mcp-server/*', 'github/*', todo]
+tools: [vscode, execute, read, agent, edit, search, web, 'com.atlassian/atlassian-mcp-server/*', 'github/*', todo]
 ---
 
 # Prerequisite checks:
